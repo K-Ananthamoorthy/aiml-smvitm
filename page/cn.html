@@ -542,110 +542,90 @@ printf("\nNumber of packets dropped is: %d\n", count);
         </div>
     </div>
 
-    <h2 class="text-center mt-4">JAVA </h2>
+<h2 class="text-center mt-4">JAVA </h2>
   <!-- Program 5 -->
   <div class="row">
     <div class="col-md-12">
         <div class="card program-card">
             <i class="fas fa-copy copy-icon" onclick="copyToClipboard('program5')"></i>
             <div class="card-body">
-                <h5 class="card-title"> 1. Write a program for error detecting code using CRC-CCITT (16- bits).
-                    
-   
-</h5>
-                <pre><code class="csharp" id="program5">
-      
-                    importjava.util.Scanner; 
-                    public class CRCDemo 
-                    { 
-                    static String msg; 
-                    static String genPoly = "10001000000100001"; 
-                    //static String genPoly = "1101"; 
-                    static char t[] = new char[128]; 
-                    static char cs[] = new char[128]; 
-                    staticchar g[] = new char[128]; 
-                    staticintmlen,glen,x,c,flag=0,test; 
-                     
-                    public static void main(String [] args) 
-                    { 
-                    Scanner in = new Scanner(System.in); 
-                     
-                    System.out.println("Enter the message to be transferred"); 
-                    msg = in.nextLine(); 
-                    mlen = msg.length(); 
-                     
-                    for(inti=0;i<mlen;i++) 
-                    t[i] = msg.charAt(i); 
-                     
-                     
-                    System.out.println("Predefined Generator Polynomial is: " + genPoly); 
-                    g = genPoly.toCharArray(); 
-                     
-                    glen = genPoly.length();
-                     
-                    for(x=mlen;x<(mlen+glen-1);x++) 
-                    t[x] = '0'; 
-                     
-                    System.out.println("Zero extended message is: "+ new String(t)); 
-                    crc(); 
-                     
-                    System.out.println("CheckSum is:" + new String(cs)); 
-                     
-                    
-                     
-                    for(x=mlen;x<mlen+glen-1;x++) 
-                    t[x] = cs[x-mlen]; 
-                     
-                    System.out.println("Final codeword generated is:"+ new String(t)); 
-                    System.out.println("\n\nTest Error detection 1(yes) 0(no) ? : "); 
-                    test = in.nextInt(); 
-                    if(test==1) 
-                    { 
-                    System.out.println("Enter position where error is to inserted : "); 
-                    x = in.nextInt(); 
-                    t[x] = (t[x]=='0')?'1':'0'; 
-                    System.out.println("Errorneous data :"+ new String(t)); 
-                    } 
-                    crc(); // computation at receiver side 
-                     
-                    for(x=0;x<(glen-1); x++) 
-                    { 
-                    if(cs[x] =='1') 
-                    { 
-                    flag =1; 
-                    break; 
-                    } 
-                    } 
-                    if(flag==1) 
-                    System.out.println("Error was detected during transfer"); 
-                    else 
-                    System.out.println("No Error Detected during transfer"); 
-                     
-                    } 
-                    public static void crc() 
-                    { 
-                    for(x=0; x<glen; x++) 
-                    cs[x] = t[x]; 
-                    do 
-                    { 
-                    if(cs[0] == '1') 
-                    xor(); 
-                     
-                    for(c=0; c<glen-1; c++) 
-                    { 
-                    cs[c] = cs[c+1]; 
-                    } 
-                    cs[c] = t[x++]; 
-                    }while(x<=mlen+glen-1); 
-                    } 
-                     
-                    public static void xor() 
-                    { 
-                    for(c=1; c<glen; c++) 
-                    cs[c] = ((cs[c]==g[c])? '0' : '1'); 
-                    } 
-                    }        
-</code></pre>
+                <h5 class="card-title"> 1. Write a program for error detecting code using CRC-CCITT (16- bits).</h5>
+                <pre>
+                    <code class="csharp" id="program5">
+                        import java.util.Scanner;
+                        public class CRCDemo
+                        {
+                            static String msg;
+                            static String genPoly = "10001000000100001";
+                            static char t[] = new char[128]; 
+                            static char cs[] = new char[128]; 
+                            static char g[] = new char[128]; 
+                            static int mlen,glen,x,c,flag=0,test;
+                            public static void main(String [] args)
+                            {
+                                Scanner in = new Scanner(System.in);
+                                System.out.println("Enter the message to be transferred");
+                                msg = in.nextLine();
+                                mlen = msg.length(); 
+                                for(int i=0;i < mlen;i++)
+                                    t[i] = msg.charAt(i);
+                                System.out.println("Predefined Generator Polynomial is: " + genPoly);
+                                g = genPoly.toCharArray();
+                                glen = genPoly.length();
+                                for(x=mlen;x<(mlen+glen-1);x++)
+                                    t[x] = '0';
+                                System.out.println("Zero extended message is: "+ new String(t));
+                                crc(); 
+                                System.out.println("CheckSum is:" + new String(cs));
+                                for(x=mlen;x < mlen+glen-1;x++)
+                                    t[x] = cs[x-mlen];
+                                System.out.println("Final codeword generated is:"+ new String(t));
+                                System.out.println("\n\nTest Error detection 1(yes) 0(no) ? : ");
+                                test = in.nextInt();
+                                if(test==1)
+                                {
+                                    System.out.println("Enter position where error is to inserted : ");
+                                    x = in.nextInt();
+                                    t[x] = (t[x]=='0')?'1':'0';
+                                    System.out.println("Errorneous data :"+ new String(t));
+                                }
+                                crc(); 
+                                for(x=0;x<(glen-1); x++)
+                                {
+                                    if(cs[x] =='1')
+                                    {
+                                        flag =1;
+                                        break;
+                                    }
+                                }
+                                if(flag==1)
+                                System.out.println("Error was detected during transfer");
+                                else
+                                System.out.println("No Error Detected during transfer");
+                            }
+                            public static void crc()
+                            {
+                                for(x=0; x< glen; x++)
+                                    cs[x] = t[x];
+                                do
+                                {
+                                    if(cs[0] == '1')
+                                    xor();
+                                    for(c=0; c < glen-1; c++)
+                                    {
+                                        cs[c] = cs[c+1];
+                                    }
+                                    cs[c] = t[x++];
+                                }while(x <= mlen+glen-1);
+                            }
+                            public static void xor()
+                            {
+                                for(c=1; c< glen; c++)
+                                    cs[c] = ((cs[c] == g[c])? '0' : '1' );
+                            }
+                        }
+                    </code>
+                </pre>
             </div>
         </div>
     </div>
@@ -657,92 +637,80 @@ printf("\nNumber of packets dropped is: %d\n", count);
             <i class="fas fa-copy copy-icon" onclick="copyToClipboard('program6')"></i>
             <div class="card-body">
                 <h5 class="card-title"> 
-                    2.Write a program to find the shortest path between vertices using bellman-ford 
-algorithm. 
-
-   
-</h5>
-                <pre><code class="csharp" id="program6">
-                    importjava.util.*; 
- 
-                    public class BellmanDemoFinal 
-                    { 
-                    static Scanner in = new Scanner(System.in); 
-                    public static void main(String [] args) 
-                    { 
-                    int V,E=1,chckNegative=0; 
-                    int w[][] = new int [20][20]; 
-                    int edge[][] = new int [50][2]; 
-                    
-                    System.out.println("Enter the no of vertices "); 
-                    V = in.nextInt(); 
-                     
-                    System.out.println("Enter the weight matrix"); 
-                    for(inti=1;i<=V;i++) 
-                    for(int j=1;j<=V;j++) 
-                    { 
-                    w[i][j] = in.nextInt(); 
-                    if(w[i][j]!=0) 
-                    { edge[E][0]=i; 
-                    edge[E++][1]=j; 
-                    } 
-                    } 
-                    chckNegative = bellmanFord(w,V,E,edge); 
-                    if(chckNegative == 1) 
-                    System.out.println("\nNo negative weight cycle\n"); 
-                    else 
-                    System.out.println("\nNegative weight cycle exists\n"); 
-                    } 
-                     
-                    public static intbellmanFord(int w[][],intV,intE,int edge[][]) 
-                    { 
-                    intu,v,S,flag=1; 
-                    int distance [] = new int[20]; 
-                    int parent [] = new int [20]; 
-                    /* Assign the distance of all the vertices to 999 */ 
-                    for(inti=1;i<=V;i++) 
-                    { 
-                    distance[i] = 999; 
-                    parent[i]=-1; 
-                    } 
-                     
-                    System.out.println("Enter the source vertex"); 
-                    S = in.nextInt(); 
-                     
-                    
-                    distance[S]=0; 
-                    
-                    for(inti=1;i<=V-1;i++) 
-                    { 
-                    for(int k=1;k<=E;k++) 
-                    { 
-                    u = edge[k][0]; 
-                    v = edge[k][1] ; 
-                    
-                    if(distance[u]+w[u][v] < distance[v]) 
-                    { 
-                    distance[v] = distance[u] + w[u][v] ; 
-                    parent[v]=u ; 
-                    } 
-                    } 
-                    } 
-                     
-                    
-                    for(int k=1;k<=E;k++) 
-                    { 
-                    u = edge[k][0] ; 
-                    v = edge[k][1] ; 
-                    if(distance[u]+w[u][v] < distance[v]) 
-                    flag = 0 ; 
-                    } 
-                    if(flag==1) 
-                    for(inti=1;i<=V;i++) 
-                    System.out.println("Vertex " + i + " -> cost = " + distance[i] + " parent = "+ (parent[i])); 
-                    return flag; 
-                    } 
-                    }
-                    
-</code></pre>
+                    2.Write a program to find the shortest path between vertices using bellman-ford algorithm.
+                </h5>
+                <pre>
+                    <code class="csharp" id="program6">
+                        importjava.util.*; 
+                        public class BellmanDemoFinal 
+                        { 
+                            static Scanner in = new Scanner(System.in); 
+                            public static void main(String [] args) 
+                            { 
+                                int V,E=1,chckNegative=0; 
+                                int w[][] = new int [20][20]; 
+                                int edge[][] = new int [50][2];     
+                                System.out.println("Enter the no of vertices "); 
+                                V = in.nextInt(); 
+                                System.out.println("Enter the weight matrix"); 
+                                for(inti=1;i<=V;i++) 
+                                for(int j=1;j<=V;j++) 
+                                { 
+                                    w[i][j] = in.nextInt(); 
+                                    if(w[i][j]!=0) 
+                                    {
+                                        edge[E][0]=i; 
+                                        edge[E++][1]=j; 
+                                    } 
+                                } 
+                                chckNegative = bellmanFord(w,V,E,edge); 
+                                if(chckNegative == 1) 
+                                    System.out.println("\nNo negative weight cycle\n"); 
+                                else 
+                                    System.out.println("\nNegative weight cycle exists\n"); 
+                            }
+                            public static intbellmanFord(int w[][],intV,intE,int edge[][]) 
+                            {
+                                intu,v,S,flag=1; 
+                                int distance [] = new int[20]; 
+                                int parent [] = new int [20]; 
+                                /* Assign the distance of all the vertices to 999 */ 
+                                for(inti=1;i<=V;i++) 
+                                { 
+                                    distance[i] = 999; 
+                                    parent[i]=-1; 
+                                }
+                                System.out.println("Enter the source vertex"); 
+                                S = in.nextInt(); 
+                                distance[S]=0; 
+                                for(inti=1;i<=V-1;i++) 
+                                { 
+                                    for(int k=1;k<=E;k++) 
+                                    { 
+                                        u = edge[k][0]; 
+                                        v = edge[k][1] ; 
+                                        if(distance[u]+w[u][v] < distance[v]) 
+                                        { 
+                                            distance[v] = distance[u] + w[u][v] ; 
+                                            parent[v]=u ; 
+                                        } 
+                                    } 
+                                }
+                                for(int k=1;k<=E;k++) 
+                                { 
+                                    u = edge[k][0] ; 
+                                    v = edge[k][1] ; 
+                                    if(distance[u]+w[u][v] < distance[v]) 
+                                        flag = 0 ; 
+                                }
+                                if(flag==1) 
+                                    for(inti=1;i<=V;i++) 
+                                        System.out.println("Vertex " + i + " -> cost = " + distance[i] + " parent = "+ (parent[i])); 
+                                return flag; 
+                            } 
+                        }
+                    </code>
+                </pre>
             </div>
         </div>
     </div>
@@ -755,85 +723,73 @@ algorithm.
             <i class="fas fa-copy copy-icon" onclick="copyToClipboard('program7')"></i>
             <div class="card-body">
                 <h5 class="card-title"> 
-                    7.Write a program for congestion control using leaky bucket algorithm. 
-   
-</h5>
-                <pre><code class="csharp" id="program7">
-                    import java.util.Random; 
-                    import java.util.Scanner; 
-                     
-                    public class LeakyDemo 
-                    { 
-                    public static void main(String [] args) 
-                    { 
-                    int bcktsize,iter, oprate, flow, total=0, rem_bytes; 
-                    int pkt[] = new int[25]; 
-                     
-                    Scanner in = new Scanner(System.in); 
-                     
-                    System.out.println("Enter the no of input flows"); 
-                    flow = in.nextInt(); 
-                     
-                    System.out.println("Enter the no of iterations"); 
-                    iter = in.nextInt(); 
-                     
-                    System.out.println("Enter the bucket size and output rate :"); 
-                    bcktsize = in.nextInt(); 
-                    oprate = in.nextInt(); 
-                     
-                    Random rand = new Random(); 
-                    for(int i=0;i<iter;i++) 
-                    { 
-                    System.out.println("Iteration: " + (i+1)); 
-                    for(int j=0;j<flow;j++) 
-                    { 
-                    rand.setSeed(System.nanoTime()); 
-                    pkt[j] = rand.nextInt(500); 
-                    total += pkt[j]; 
-                     
-                    if(total<=bcktsize)  
-                    { 
-                    System.out.println(" Input from flow " + (j+1) + " with packet size " + pkt[j] +" bytes are 
-                    accepted for the bucket Number of bytes in bucket is : "+ total); 
-                    } 
-                     
-                    else 
-                    { 
-                    total-=pkt[j]; 
-                    System.out.println(" Input from flow " + (j+1) + " with packet size " + pkt[j]+" bytes 
-                    are discarded from the bucket Number of bytes in bucket is: " + total); 
-                    } 
-                    } 
-                    if(oprate> total)  
-                    { 
-                    rem_bytes = total; 
-                    total = 0; 
-                    System.out.println("  "); 
-                    System.out.println("Output rate of the bucket is: "+ oprate + " \n Bytes sent out of the 
-                    bucket is " + rem_bytes); 
-                    System.out.println("  "); 
-                    } 
-                    else 
-                    { 
-                    total -= oprate; 
-                    System.out.println("  "); 
-                    System.out.println(" Output rate of the bucket is " + oprate +" \n Number of bytes 
-                    remaining in bucket is" +total); 
-                    System.out.println(" --------------------------------- "); 
-                    } 
-                    } 
-                     
-                    } 
-                    }
-                    
-</code></pre>
+                    3.Write a program for congestion control using leaky bucket algorithm. 
+                </h5>
+                <pre>
+                    <code class="csharp" id="program7">
+                        import java.util.Random; 
+                        import java.util.Scanner;  
+                        public class LeakyDemo 
+                        { 
+                            public static void main(String [] args) 
+                            {
+                                int bcktsize,iter, oprate, flow, total=0, rem_bytes; 
+                                int pkt[] = new int[25]; 
+                                Scanner in = new Scanner(System.in); 
+                                System.out.println("Enter the no of input flows"); 
+                                flow = in.nextInt(); 
+                                System.out.println("Enter the no of iterations"); 
+                                iter = in.nextInt(); 
+                                System.out.println("Enter the bucket size and output rate :"); 
+                                bcktsize = in.nextInt(); 
+                                oprate = in.nextInt();
+                                Random rand = new Random(); 
+                                for(int i=0;i < iter;i++) 
+                                { 
+                                    System.out.println("Iteration: " + (i+1)); 
+                                    for(int j=0;j< flow;j++) 
+                                    {
+                                        rand.setSeed(System.nanoTime()); 
+                                        pkt[j] = rand.nextInt(500); 
+                                        total += pkt[j]; 
+                                        if(total <= bcktsize)  
+                                        { 
+                                            System.out.println(" Input from flow " + (j+1) + " with packet size " + pkt[j] +" bytes are accepted for the bucket Number of bytes in bucket is : "+ total); 
+                                        }
+                                        else 
+                                        { 
+                                            total -= pkt[j]; 
+                                            System.out.println(" Input from flow " + (j+1) + " with packet size " + pkt[j]+" bytes are discarded from the bucket Number of bytes in bucket is: " + total); 
+                                        }
+                                    } 
+                                    if(oprate> total)  
+                                    { 
+                                        rem_bytes = total; 
+                                        total = 0; 
+                                        System.out.println("  "); 
+                                        System.out.println("Output rate of the bucket is: "+ oprate + " \n Bytes sent out of the 
+                                        bucket is " + rem_bytes); 
+                                        System.out.println("  "); 
+                                    } 
+                                    else 
+                                    { 
+                                        total -= oprate; 
+                                        System.out.println("  "); 
+                                        System.out.println(" Output rate of the bucket is " + oprate +" \n Number of bytes 
+                                        remaining in bucket is" +total); 
+                                        System.out.println(" --------------------------------- "); 
+                                    } 
+                                }        
+                            } 
+                        }
+                    </code>
+                </pre>
             </div>
         </div>
     </div>
 </div>
 
 
- 
 </div>
 
 <div class="footer">
