@@ -1,0 +1,904 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>C# Lab Programs</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome CSS for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+    <!-- Highlight.js CSS for syntax highlighting -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/styles/default.min.css">
+    <style>
+        body {
+            background-color: #343a40;
+            color: #ffffff;
+            padding-top: 56px; /* Adjusted for the fixed navbar */
+        }
+        .program-section {
+            margin-top: 20px;
+        }
+        .program-card {
+            border: 1px solid #dee2e6;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            background-color: #ffffff;
+            color: #343a40;
+            position: relative;
+        }
+        .copy-icon {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 20px;
+            color: #007bff;
+            cursor: pointer;
+        }
+        .navbar {
+            background-color: #007bff;
+            color: white;
+        }
+        .footer {
+            background-color: #343a40;
+            color: #ffffff;
+            text-align: center;
+            padding: 5px;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            opacity: 0.9;
+            border-top: 1px solid #007bff;
+        }
+        .footer-icons {
+            font-size: 24px;
+            margin: 0 10px;
+            color: #007bff;
+            transition: color 0.3s ease-in-out;
+        }
+        .footer-icons:hover {
+            color: #ffffff;
+        }
+        .dark-toast {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: #343a40;
+            color: #ffffff;
+            padding: 15px;
+            border-radius: 10px;
+            z-index: 1000;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+    <a class="navbar-brand" href="#">C# Lab</a>
+</nav>
+
+<div class="container-fluid">
+    <h2 class="text-center mt-4">C# Lab Programs</h2>
+
+    <!-- Program 1 -->
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card program-card">
+                <i class="fas fa-copy copy-icon" onclick="copyToClipboard('program1')"></i>
+                <div class="card-body">
+                    <h5 class="card-title">1. Develop a C# program to simulate a simple arithmetic calculator </h5>
+                    <pre><code class="csharp" id="program1">
+                      
+                        using System;
+
+                        class Program
+                        {
+                            static void Main(string[] args)
+                            {
+                                int a = 1;
+                                while (a == 1)
+                                {
+                                    Console.Write("Enter the first number: ");
+                                    double num1 = Convert.ToDouble(Console.ReadLine());
+                        
+                                    Console.Write("Enter the second number: ");
+                                    double num2 = Convert.ToDouble(Console.ReadLine());
+                        
+                                    Console.Write("Enter the operator (+, -, *, /, %): ");
+                                    char op = Convert.ToChar(Console.ReadLine());
+                        
+                                    double result = 0;
+                        
+                                    switch (op)
+                                    {
+                                        case '+':
+                                            result = num1 + num2;
+                                            break;
+                                        case '-':
+                                            result = num1 - num2;
+                                            break;
+                                        case '*':
+                                            result = num1 * num2;
+                                            break;
+                                        case '/':
+                                            result = num1 / num2;
+                                            break;
+                                        case '%':
+                                            result = num1 % num2;
+                                            break;
+                                        default:
+                                            Console.WriteLine("Invalid operator!");
+                                            break;
+                                    }
+                        
+                                    Console.WriteLine("{0} {1} {2} = {3}", num1, op, num2, result);
+                                    Console.Write("If you want to continue enter 1 else enter 0");
+                                    a = Convert.ToInt32(Console.ReadLine());
+                                }
+                            }
+                        }
+                        
+                    
+                    </code></pre>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Program 2 -->
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card program-card">
+                <i class="fas fa-copy copy-icon" onclick="copyToClipboard('program2')"></i>
+                <div class="card-body">
+                    <h5 class="card-title">2. Armstrong Number</h5>
+                    <pre><code class="csharp" id="program2">
+                        using System;
+                        class Program
+                        {
+                        static void Main()
+                        {
+                        int a, b, c, d;
+                        for (int i = 1; i &lt;= 1000; i++)
+                        {
+                        a = i / 100;
+                        b = (i - a * 100) / 10;
+                        c = (i - a * 100 - b * 10);
+                        d = a * a * a + b * b * b + c * c * c;
+                        if (i == d)
+                        {
+                        Console.WriteLine(i);
+                        }
+                        }
+                        }
+                        }
+                    </code></pre>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Program 3 -->
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card program-card">
+                <i class="fas fa-copy copy-icon" onclick="copyToClipboard('program3')"></i>
+                <div class="card-body">
+                    <h5 class="card-title">3. Develop a C# program to list all substrings in a given string. [Hint: use of Substring() method]</h5>
+                    <pre><code class="csharp" id="program3">
+                        using System;
+
+                        class Program
+                        {
+                            static void Main(string[] args)
+                            {
+                                Console.Write("Enter a string: ");
+                                string inputString = Console.ReadLine();
+                        
+                                Console.WriteLine("All substrings of the given string are:");
+                                for (int i = 0; i < inputString.Length; i++)
+                                {
+                                    for (int j = i + 1; j <= inputString.Length; j++)
+                                    {
+                                        Console.WriteLine(inputString.Substring(i, j - i));
+                                    }
+                                }
+                            }
+                        }
+                        
+                    </code></pre>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Program 4 -->
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card program-card">
+                <i class="fas fa-copy copy-icon" onclick="copyToClipboard('program4')"></i>
+                <div class="card-body">
+                    <h5 class="card-title">4. Develop a C# program to demonstrate Division by Zero and Index Out of Range exceptions.</h5>
+                    <pre><code class="csharp" id="program4">
+                        using System;
+
+                        class Program
+                        {
+                            static void Main(string[] args)
+                            {
+                                // Declare an array of integers
+                                int[] numbers = { 10, 20, 30, 40, 50 };
+                        
+                                // Declare a variable to store the result of division
+                                int result = 0;
+                        
+                                // Use a try block to execute the code that may cause exceptions
+                                try
+                                {
+                                    // Attempt to divide the first element of the array by the user input
+                                    Console.Write("Enter a number to divide by: ");
+                                    int divisor = int.Parse(Console.ReadLine());
+                                    result = numbers[0] / divisor;
+                        
+                                    // Attempt to access the sixth element of the array
+                                    Console.WriteLine("The sixth element of the array is: " + numbers[5]);
+                                }
+                                // Use a catch block to handle the specific exception
+                                catch (DivideByZeroException ex)
+                                {
+                                    // Display the message of the exception
+                                    Console.WriteLine("Division by zero exception: " + ex.Message);
+                                }
+                                // Use another catch block to handle another specific exception
+                                catch (IndexOutOfRangeException ex)
+                                {
+                                    // Display the message of the exception
+                                    Console.WriteLine("Index out of range exception: " + ex.Message);
+                                }
+                                // Use a finally block to execute the code that always runs
+                                finally
+                                {
+                                    // Display the result of the division
+                                    Console.WriteLine("The result of the division is: " + result);
+                                }
+                            }
+                        }
+                        
+                    </code></pre>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Program 5 -->
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card program-card">
+                <i class="fas fa-copy copy-icon" onclick="copyToClipboard('program5')"></i>
+                <div class="card-body">
+                    <h5 class="card-title">5. Develop a C# program to generate and print Pascal Triangle using Two Dimensional arrays.</h5>
+                    <pre><code class="csharp" id="program5">
+                        using System;
+
+                        class Program
+                        {
+                            static void Main(string[] args)
+                            {
+                                // Get the number of rows from the user
+                                Console.Write("Enter the number of rows: ");
+                                int n = int.Parse(Console.ReadLine());
+                        
+                                // Declare a two dimensional array to store the Pascal Triangle
+                                int[,] pascal = new int[n, n];
+                        
+                                // Loop through the rows
+                                for (int i = 0; i < n; i++)
+                                {
+                                    // Loop through the columns
+                                    for (int j = 0; j <= i; j++)
+                                    {
+                                        // The first and last element of each row is 1
+                                        if (j == 0 || j == i)
+                                        {
+                                            pascal[i, j] = 1;
+                                        }
+                                        // The other elements are the sum of the two elements above it
+                                        else
+                                        {
+                                            pascal[i, j] = pascal[i - 1, j - 1] + pascal[i - 1, j];
+                                        }
+                                    }
+                                }
+                        
+                                // Loop through the rows to print the Pascal Triangle
+                                for (int i = 0; i < n; i++)
+                                {
+                                    // Print some spaces for alignment
+                                    for (int k = 0; k < n - i - 1; k++)
+                                    {
+                                        Console.Write(" ");
+                                    }
+                                    // Print the elements of the current row
+                                    for (int j = 0; j <= i; j++)
+                                    {
+                                        Console.Write(pascal[i, j] + " ");
+                                    }
+                                    // Print a new line
+                                    Console.WriteLine();
+                                }
+                            }
+                        }
+                    </code></pre>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Program 6 -->
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card program-card">
+                <i class="fas fa-copy copy-icon" onclick="copyToClipboard('program6')"></i>
+                <div class="card-body">
+                    <h5 class="card-title">6. Develop a C# program to generate and print Floyd's Triangle using Jagged arrays.</h5>
+                    <pre><code class="csharp" id="program6">
+                        using System;
+
+                        class Program
+                        {
+                            static void Main(string[] args)
+                            {
+                                // Get the number of rows from the user
+                                Console.Write("Enter the number of rows: ");
+                                int rows = int.Parse(Console.ReadLine());
+                        
+                                // Declare a jagged array of size rows
+                                int[][] triangle = new int[rows][];
+                        
+                                // Initialize a counter variable
+                                int counter = 1;
+                        
+                                // Loop through the rows of the jagged array
+                                for (int i = 0; i < rows; i++)
+                                {
+                                    // Initialize the ith row with an array of size i+1
+                                    triangle[i] = new int[i + 1];
+                        
+                                    // Loop through the columns of the ith row
+                                    for (int j = 0; j < i + 1; j++)
+                                    {
+                                        // Assign the counter value to the current element
+                                        triangle[i][j] = counter;
+                        
+                                        // Increment the counter
+                                        counter++;
+                                    }
+                                }
+                        
+                                // Print the jagged array as Floyd's Triangle
+                                Console.WriteLine("Floyd's Triangle:");
+                                for (int i = 0; i < rows; i++)
+                                {
+                                    for (int j = 0; j < i + 1; j++)
+                                    {
+                                        // Print the current element with a space
+                                        Console.Write(triangle[i][j] + " ");
+                                    }
+                                    // Print a new line after each row
+                                    Console.WriteLine();
+                                }
+                            }
+                        }
+                    </code></pre>
+                </div>
+            </div>
+        </div>
+    </div>
+
+  
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card program-card">
+                <i class="fas fa-copy copy-icon" onclick="copyToClipboard('program7')"></i>
+                <div class="card-body">
+                    <h5 class="card-title">7. copy files</h5>
+                    <pre><code class="csharp" id="program7">
+                      using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.IO;
+namespace lab_program6
+{
+internal class Program
+{
+static void Main(string[] args)
+{
+string sourceFilePath =
+&quot;D:\\madhvavadiraja_2023_odd\\c#\\programs\\lab_program6\\source.txt&quot;;
+string destinationFilePath =
+&quot;D:\\madhvavadiraja_2023_odd\\c#\\programs\\lab_program6\\destination.txt&quot;;
+try
+{
+// Read the contents of the source file
+string fileContents = File.ReadAllText(sourceFilePath);
+// Write the contents to the destination file
+File.WriteAllText(destinationFilePath, fileContents);
+Console.WriteLine(&quot;File copied successfully!&quot;);
+Console.ReadKey();
+}
+catch (Exception ex)
+{
+Console.WriteLine(&quot;Error: &quot; + ex.Message);
+Console.ReadKey();
+}
+}
+}
+}
+                    </code></pre>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card program-card">
+                <i class="fas fa-copy copy-icon" onclick="copyToClipboard('program8')"></i>
+                <div class="card-body">
+                    <h5 class="card-title"> Program 8</h5>
+                    <pre><code class="csharp" id="program8">
+                        using System;
+                        using System.Collections;
+                        using System.Collections.Generic;
+                        using System.Linq;
+                        using System.Text;
+                        using System.Threading.Tasks;
+                        namespace ConsoleApplication
+                        {
+                        public class Stack
+                        {
+                        public static void Main(string[] args)
+                        {
+                        stack st = new stack();
+                        while (true)
+                        {
+                        
+                        System.Console.WriteLine(&quot;\nStack MENU(size -- 10)&quot;);
+                        System.Console.WriteLine(&quot;1. Add an element&quot;);
+                        System.Console.WriteLine(&quot;2. See the Top element.&quot;);
+                        System.Console.WriteLine(&quot;3. Remove top element.&quot;);
+                        System.Console.WriteLine(&quot;4. Display stack elements.&quot;);
+                        System.Console.WriteLine(&quot;5. Exit&quot;);
+                        System.Console.Write(&quot;Select your choice: &quot;);
+                        int choice = Convert.ToInt32(System.Console.ReadLine());
+                        switch (choice)
+                        {
+                        case 1:
+                        System.Console.WriteLine(&quot;Enter an Element : &quot;);
+                        st.Push(Console.ReadLine());
+                        break;
+                        case 2:
+                        System.Console.WriteLine(&quot;Top element is: {0}&quot;, st.Peek());
+                        break;
+                        case 3:
+                        System.Console.WriteLine(&quot;Element removed: {0}&quot;, st.Pop());
+                        break;
+                        case 4:
+                        st.Display();
+                        break;
+                        case 5:
+                        System.Environment.Exit(1);
+                        break;
+                        }
+                        }
+                        }
+                        }
+                        public interface StackADT
+                        {
+                        Boolean isEmpty();
+                        void Push(Object element);
+                        Object Pop();
+                        Object Peek();
+                        void Display();
+                        }
+                        public class stack : StackADT
+                        {
+                        private int StackSize;
+                        public int StackSizeSet
+                        {
+                        get { return StackSize; }
+                        set { StackSize = value; }
+                        }
+                        public int top;
+                        public Object[] item;
+                        public stack()
+                        {
+                        StackSizeSet = 10;
+                        item = new Object[StackSizeSet];
+                        top = -1;
+                        }
+                        public stack(int capacity)
+                        {
+                        StackSizeSet = capacity;
+                        item = new Object[StackSizeSet];
+                        top = -1;
+                        }
+                        public bool isEmpty()
+                        {
+                        
+                        if (top == -1) return true;
+                        return false;
+                        }
+                        public void Push(object element)
+                        {
+                        if (top == (StackSize - 1))
+                        {
+                        System.Console.WriteLine(&quot;Stack is full!&quot;);
+                        }
+                        else
+                        {
+                        item[++top] = element;
+                        System.Console.WriteLine(&quot;Item pushed successfully!&quot;);
+                        }
+                        }
+                        public object Pop()
+                        {
+                        if (isEmpty())
+                        {
+                        System.Console.WriteLine(&quot;Stack is empty!&quot;);
+                        return &quot;No elements&quot;;
+                        }
+                        else
+                        {
+                        return item[top--];
+                        }
+                        }
+                        public object Peek()
+                        {
+                        if (isEmpty())
+                        {
+                        System.Console.WriteLine(&quot;Stack is empty!&quot;);
+                        return &quot;No elements&quot;;
+                        }
+                        else
+                        {
+                        return item[top];
+                        }
+                        }
+                        public void Display()
+                        {
+                        for (int i = top; i &gt; -1; i--)
+                        {
+                        System.Console.WriteLine(&quot;Item {0}: {1}&quot;, (i + 1), item[i]);
+                        }
+                        }
+                        }
+                        }
+                    </code></pre>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card program-card">
+                <i class="fas fa-copy copy-icon" onclick="copyToClipboard('program9')"></i>
+                <div class="card-body">
+                    <h5 class="card-title"> Program 9</h5>
+                    <pre><code class="csharp" id="program9">
+                        using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+namespace Lab_program9
+{
+public class Complex
+{
+public int real;
+public int imaginary;
+
+public Complex(int real, int imaginary)
+{
+this.real = real;
+this.imaginary = imaginary;
+}
+public static Complex operator +(Complex c1, Complex c2)
+{
+return new Complex(c1.real + c2.real, c1.imaginary + c2.imaginary);
+}
+}
+class Program
+{
+static void Main(string[] args)
+{
+Console.WriteLine(&quot;Enter the first complex number:&quot;);
+int real1 = Convert.ToInt32(Console.ReadLine());
+int imaginary1 = Convert.ToInt32(Console.ReadLine());
+Complex num1 = new Complex(real1, imaginary1);
+Console.WriteLine(&quot;Enter the second complex number:&quot;);
+int real2 = Convert.ToInt32(Console.ReadLine());
+int imaginary2 = Convert.ToInt32(Console.ReadLine());
+Complex num2 = new Complex(real2, imaginary2);
+Complex sum = num1 + num2;
+Console.WriteLine(&quot;The sum of the two complex numbers is: {0} + {1}i&quot;, sum.real, sum.imaginary);
+Console.ReadKey();
+}
+}
+}
+                    </code></pre>
+                </div>
+            </div>
+        </div>
+    </div>
+
+ 
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card program-card">
+                <i class="fas fa-copy copy-icon" onclick="copyToClipboard('program10')"></i>
+                <div class="card-body">
+                    <h5 class="card-title"> Program 10</h5>
+                    <pre><code class="csharp" id="program10">
+                        using System;
+                        using System.Collections.Generic;
+                        using System.Linq;
+                        using System.Text;
+                        using System.Threading.Tasks;
+                        namespace lab_program_10
+                        {
+                        class Shape
+                        {
+                        public virtual void draw()
+                        {
+                        Console.WriteLine(&quot;Drawing a shape&quot;);
+                        }
+                        public virtual void erase()
+                        {
+                        Console.WriteLine(&quot;Erasing a shape&quot;);
+                        }
+                        }
+                        class Circle : Shape
+                        {
+                        public override void draw()
+                        {
+                        Console.WriteLine(&quot;Drawing a circle&quot;);
+                        
+                        }
+                        public override void erase()
+                        {
+                        Console.WriteLine(&quot;Erasing a circle&quot;);
+                        }
+                        }
+                        class Triangle : Shape
+                        {
+                        public override void draw()
+                        {
+                        Console.WriteLine(&quot;Drawing a triangle&quot;);
+                        }
+                        public override void erase()
+                        {
+                        Console.WriteLine(&quot;Erasing a triangle&quot;);
+                        }
+                        }
+                        class Square : Shape
+                        {
+                        public override void draw()
+                        {
+                        Console.WriteLine(&quot;Drawing a square&quot;);
+                        }
+                        public override void erase()
+                        {
+                        Console.WriteLine(&quot;Erasing a square&quot;);
+                        }
+                        }
+                        class Program
+                        {
+                        static void Main(string[] args)
+                        {
+                        Shape[] shapes = new Shape[3];
+                        shapes[0] = new Circle();
+                        shapes[1] = new Triangle();
+                        shapes[2] = new Square();
+                        foreach (Shape shape in shapes)
+                        {
+                        shape.draw();
+                        shape.erase();
+                        }
+                        Console.ReadKey();
+                        }
+                        }
+                        }
+                    </code></pre>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card program-card">
+                <i class="fas fa-copy copy-icon" onclick="copyToClipboard('program11')"></i>
+                <div class="card-body">
+                    <h5 class="card-title"> Program 11</h5>
+                    <pre><code class="csharp" id="program11">
+                    using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+namespace Lab_program_11
+{
+
+abstract class Shape
+{
+public abstract double calculateArea();
+public abstract double calculatePerimeter();
+}
+class Circle : Shape
+{
+private double radius;
+public Circle(double radius)
+{
+this.radius = radius;
+}
+public override double calculateArea()
+{
+return Math.PI * radius * radius;
+}
+public override double calculatePerimeter()
+{
+return 2 * Math.PI * radius;
+}
+}
+class Triangle : Shape
+{
+private double side1;
+private double side2;
+private double side3;
+public Triangle(double side1, double side2, double side3)
+{
+this.side1 = side1;
+this.side2 = side2;
+this.side3 = side3;
+}
+public override double calculateArea()
+{
+double s = (side1 + side2 + side3) / 2;
+return Math.Sqrt(s * (s - side1) * (s - side2) * (s - side3));
+}
+public override double calculatePerimeter()
+{
+return side1 + side2 + side3;
+}
+}
+public class ShapeClient
+{
+public static void Main(string[] args)
+{
+double side1 = 13, side2 = 9, side3=10;
+Shape triangle = new Triangle(side1, side2,side3);
+Console.WriteLine(&quot;The sides of circle are side1:&quot;+side1+&quot; side2:&quot;+side2+&quot; side3:&quot;+side3+
+&quot;\nThe area of the triangle is: &quot; + triangle.calculateArea()
++ &quot;\nThe perimeter of the triangle is: &quot; + triangle.calculatePerimeter() + &quot;.&quot;);
+double radius = 3;
+Shape circle = new Circle(radius);
+Console.WriteLine(&quot;\nThe radius of the circle is: &quot; + radius
+
++ &quot;\nThe area of the circle is: &quot; + circle.calculateArea()
++ &quot;\nThe perimeter of the circle is: &quot; + circle.calculatePerimeter() + &quot;.&quot;);
+Console.ReadKey();
+}
+}
+}
+                    </code></pre>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card program-card">
+                <i class="fas fa-copy copy-icon" onclick="copyToClipboard('program12')"></i>
+                <div class="card-body">
+                    <h5 class="card-title"> Program 12</h5>
+                    <pre><code class="csharp" id="program12">
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Security.Cryptography;
+using System.Text;
+using System.Threading.Tasks;
+namespace Lab_Program_12
+{
+interface Resizable
+{
+int resizeWidth(int width);
+int resizeHeight(int height);
+}
+class Rectangle : Resizable
+{
+private int width;
+private int height;
+public Rectangle(int width, int height)
+{
+this.width = width;
+this.height = height;
+Console.WriteLine(&quot;Initial width and height of rectangle (&quot;+this.width+&quot;,&quot;+this.height+&quot;)&quot;);
+}
+public int resizeWidth(int width)
+{
+this.width = width;
+return width;
+}
+public int resizeHeight(int height)
+{
+this.height = height;
+return height;
+}
+}
+public class ShapeClient
+{
+public static void Main(string[] args)
+{
+Rectangle r = new Rectangle(10, 15);
+Console.WriteLine(&quot;Resize width of rectangle &quot;+ r.resizeWidth(15));
+Console.WriteLine(&quot;Resize height of rectangle &quot;+ r.resizeHeight(20));
+Console.ReadKey();
+}
+}
+
+}
+                    </code></pre>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="footer">
+    <!-- <span class="footer-icons"><i class="fab fa-twitter"></i></span>
+    <span class="footer-icons"><i class="fab fa-facebook"></i></span>
+    <span class="footer-icons"><i class="fab fa-linkedin"></i></span> -->
+    <span class="footer-icons">For| <i class="fab fa-github"></i> |Engineers</span>
+</div>
+
+<div id="dark-toast" class="dark-toast">
+    <div class="toast-body">Copied to clipboard!</div>
+</div>
+
+<!-- Bootstrap JS and Popper.js -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.0.7/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<!-- Highlight.js for syntax highlighting -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+<script>
+    function copyToClipboard(elementId) {
+        var copyText = document.getElementById(elementId);
+        var textArea = document.createElement("textarea");
+        textArea.value = copyText.innerText;
+        document.body.appendChild(textArea);
+        textArea.select();
+        document.execCommand('copy');
+        document.body.removeChild(textArea);
+
+        var toast = document.getElementById('dark-toast');
+        toast.style.display = 'block';
+        toast.innerText = 'Copied to clipboard!';
+
+        setTimeout(function () {
+            toast.style.display = 'none';
+        }, 2000);
+    }
+</script>
+
+</body>
+</html>

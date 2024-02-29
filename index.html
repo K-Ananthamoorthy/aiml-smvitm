@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Home</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome CSS for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+    <style>
+        body {
+            background-color: #f8f9fa;
+            color: #495057;
+            padding-bottom: 70px; /* Adjusted for the fixed footer */
+        }
+        .navbar {
+            background-color: #007bff;
+            color: white;
+        }
+        .container {
+            text-align: center;
+            margin-top: 100px;
+            opacity: 0;
+            animation: fadeIn 1s forwards;
+        }
+        .btn-csharp, .btn-dbms, .btn-cn {
+            background-color: #007bff;
+            color: #ffffff;
+            border: none;
+            padding: 10px 20px;
+            font-size: 18px;
+            border-radius: 5px;
+            text-decoration: none;
+            transition: background-color 0.3s ease-in-out;
+            margin: 10px;
+            opacity: 0;
+            animation: fadeIn 1s forwards;
+        }
+        .btn-csharp:hover, .btn-dbms:hover, .btn-cn:hover {
+            background-color: #0056b3;
+        }
+        .footer {
+            background-color: #343a40;
+            color: #ffffff;
+            text-align: center;
+            padding: 5px;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            opacity: 0.9;
+            border-top: 1px solid #007bff;
+            opacity: 0;
+            animation: fadeIn 1s forwards 1s;
+        }
+        .footer-icons {
+            font-size: 24px;
+            margin: 0 10px;
+            color: #007bff;
+            transition: color 0.3s ease-in-out;
+        }
+        .footer-icons:hover {
+            color: #ffffff;
+        }
+        .cookie-banner {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background-color: #343a40;
+            color: #ffffff;
+            padding: 10px;
+            text-align: center;
+            display: none;
+            opacity: 0;
+            animation: fadeIn 1s forwards 2s;
+        }
+        .cookie-accept {
+            background-color: #007bff;
+            color: #ffffff;
+            border: none;
+            padding: 5px 10px;
+            font-size: 14px;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+        .cookie-accept:hover {
+            background-color: #0056b3;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+    <a class="navbar-brand" href="#">Dept.of AI-ML</a>
+</nav>
+
+<div class="container">
+    <h1>Welcome</h1>
+    
+    <p>for everyone and everything .</p>
+    <a href="/page/cshaarp.html" class="btn btn-csharp">Go to C# Lab</a>
+    <a href="/page/404.html" class="btn btn-dbms">Go to DBMS Lab</a>
+    <a href="/page/cn.html" class="btn btn-cn">Go to CN Lab</a>
+    <a href="/page/404.html" class="btn btn-cn">Go to AIML</a>
+   
+</div>
+
+<div class="footer">
+    <!-- <span class="footer-icons"><i class="fab fa-twitter"></i></span> -->
+    <!-- <span class="footer-icons"><i class="fab fa-facebook"></i></span> -->
+    <!-- <span class="footer-icons"><i class="fab fa-linkedin"></i></span> -->
+    <span class="footer-icons"><i class="fab fa-github"></i></span>
+</div>
+
+<div class="cookie-banner" id="cookieBanner">
+    <p>This website uses cookies to ensure you get the best experience. <button class="cookie-accept" onclick="acceptCookies()">Accept</button></p>
+</div>
+
+<!-- Bootstrap JS and Popper.js -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.0.7/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+<script>
+    function acceptCookies() {
+        document.getElementById('cookieBanner').style.display = 'none';
+        // Set a cookie or use local storage to remember user's preference
+        // Example: document.cookie = 'cookiesAccepted=true; expires=Fri, 31 Dec 9999 23:59:59 GMT';
+    }
+
+    // Check if cookies are accepted or show the banner
+    if (document.cookie.indexOf('cookiesAccepted=true') === -1) {
+        document.getElementById('cookieBanner').style.display = 'block';
+    }
+</script>
+<!--Start of Tawk.to Script-->
+<script type="text/javascript">
+    var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+    (function(){
+    var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+    s1.async=true;
+    s1.src='https://embed.tawk.to/65a1feca8d261e1b5f52ba03/1hk0cmi2e';
+    s1.charset='UTF-8';
+    s1.setAttribute('crossorigin','*');
+    s0.parentNode.insertBefore(s1,s0);
+    })();
+    </script>
+    <!--End of Tawk.to Script-->
+
+</body>
+</html>
