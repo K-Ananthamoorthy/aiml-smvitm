@@ -1,0 +1,87 @@
+body {
+    background-color: #f8f9fa;
+    color: #495057;
+    padding-bottom: 70px; /* Adjusted for the fixed footer */
+}
+.navbar {
+    background-color: #007bff;
+    color: white;
+}
+.container {
+    text-align: center;
+    margin-top: 100px;
+    opacity: 0;
+    animation: fadeIn 1s forwards;
+}
+.btn-csharp, .btn-dbms, .btn-cn {
+    background-color: #007bff;
+    color: #ffffff;
+    border: none;
+    padding: 10px 20px;
+    font-size: 18px;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: background-color 0.3s ease-in-out;
+    margin: 10px;
+    opacity: 0;
+    animation: fadeIn 1s forwards;
+}
+.btn-csharp:hover, .btn-dbms:hover, .btn-cn:hover {
+    background-color: #0056b3;
+}
+.footer {
+    background-color: #343a40;
+    color: #ffffff;
+    text-align: center;
+    padding: 5px;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    opacity: 0.9;
+    border-top: 1px solid #007bff;
+    opacity: 0;
+    animation: fadeIn 1s forwards 1s;
+}
+.footer-icons {
+    font-size: 24px;
+    margin: 0 10px;
+    color: #007bff;
+    transition: color 0.3s ease-in-out;
+}
+.footer-icons:hover {
+    color: #ffffff;
+}
+.cookie-banner {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: #343a40;
+    color: #ffffff;
+    padding: 10px;
+    text-align: center;
+    display: none;
+    opacity: 0;
+    animation: fadeIn 1s forwards 2s;
+}
+.cookie-accept {
+    background-color: #007bff;
+    color: #ffffff;
+    border: none;
+    padding: 5px 10px;
+    font-size: 14px;
+    border-radius: 3px;
+    cursor: pointer;
+}
+.cookie-accept:hover {
+    background-color: #0056b3;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}

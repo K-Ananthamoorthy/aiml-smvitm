@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+  <div class="container mt-5">
+    <div class="row justify-content-center">
+      <div class="col-md-6">
+        <div class="card">
+          <div class="card-header">Login with Google</div>
+          <div class="card-body">
+            <button class="btn btn-primary btn-block" onclick="googleSignIn()">Sign in with Google</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Firebase JavaScript SDK -->
+  <script src="https://www.gstatic.com/firebasejs/9.6.2/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.6.2/firebase-auth-compat.js"></script>
+  <!-- Your Firebase configuration -->
+  <script>
+    // Initialize Firebase
+    const firebaseConfig = {
+        apiKey: "AIzaSyCN0VLc3wYAeKBk06g-HVtE4dDPcEZo6xk",
+  authDomain: "aiml-smvitm.firebaseapp.com",
+  projectId: "aiml-smvitm",
+  storageBucket: "aiml-smvitm.appspot.com",
+  messagingSenderId: "867145474581",
+  appId: "1:867145474581:web:a2e294081b458bdb69e41c",
+  measurementId: "G-64CF103MLC"
+    };
+    firebase.initializeApp(firebaseConfig);
+
+    function googleSignIn() {
+      const provider = new firebase.auth.GoogleAuthProvider();
+      firebase.auth().signInWithRedirect(provider);
+    }
+
+    // Handle Google sign-in redirect result
+    firebase.auth().getRedirectResult().then((result) => {
+      if (result.credential) {
+        // This gives you the Google Access Token.
+        // You can use it to access the Google API.
+        const credential = result.credential;
+        // Redirect to aiml.html upon successful login
+        window.location.href = "aiml.html";
+      }
+    }).catch((error) => {
+      // Handle Errors here.
+      const errorCode = error.code;
+      const errorMessage = error.message;
+      console.error(errorMessage);
+    });
+  </script>
+</body>
+</html>
