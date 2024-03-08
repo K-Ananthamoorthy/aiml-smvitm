@@ -31,10 +31,16 @@
       padding-top: 70px; /* Adjust based on navbar height */
     }
     .subject-section {
-      margin-bottom: 20px;
+      margin-bottom: 40px;
+      border: 1px solid #ddd; /* Gray border */
+      padding: 20px;
+      border-radius: 5px; /* Rounded corners */
+      background-color: #ffffff; /* White background */
     }
     .subject-section h3 {
-      margin-bottom: 10px;
+      margin-bottom: 20px;
+      font-weight: bold;
+      color: #333333; /* Dark text color */
     }
     .file-list {
       list-style-type: none;
@@ -43,14 +49,24 @@
     .file-list li {
       margin-bottom: 5px;
     }
+    .file-list li a {
+      color: #007bff; /* Blue link color */
+    }
+    .file-list li a:hover {
+      text-decoration: underline;
+    }
+    .upload-btn {
+      margin-top: 10px;
+    }
+    .file-input {
+      display: none;
+    }
+    .custom-file-upload {
+      cursor: pointer;
+    }
   </style>
-  <!-- Firebase JavaScript SDK -->
-  <script src="https://www.gstatic.com/firebasejs/9.6.2/firebase-app.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/9.6.2/firebase-auth.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/9.6.2/firebase-firestore.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/9.6.2/firebase-storage.js"></script>
-  <!-- Your Firebase configuration -->
-  <script src="path/to/your/firebase-config.js"></script>
+
+
 </head>
 <body>
   <!-- Navbar -->
@@ -79,40 +95,65 @@
 
   <!-- Main Content -->
   <div class="container-fluid">
+    <!-- Notes section -->
     <section id="notes" class="subject-section">
       <h3>Notes</h3>
-      <div id="notes-section" class="subject-list">
-        <!-- Notes for DBMS -->
-        <h4>DBMS</h4>
-        <ul class="file-list" id="notes-dbms"></ul>
-        <!-- Notes for PAI -->
-        <h4>PAI</h4>
-        <ul class="file-list" id="notes-pai"></ul>
-        <!-- Notes for ATC -->
-        <h4>ATC</h4>
-        <ul class="file-list" id="notes-atc"></ul>
-        <!-- Notes for CN -->
-        <h4>CN</h4>
-        <ul class="file-list" id="notes-cn"></ul>
-        <!-- Notes for EVS -->
-        <h4>EVS</h4>
-        <ul class="file-list" id="notes-evs"></ul>
-        <!-- Notes for RMIPR -->
-        <h4>RMIPR</h4>
-        <ul class="file-list" id="notes-rmipr"></ul>
+      <div class="subject-list">
+        <!-- Dynamic notes upload for each subject -->
+        <div id="notes-dbms" class="subject-notes"></div>
+        <div id="notes-pai" class="subject-notes"></div>
+        <div id="notes-atc" class="subject-notes"></div>
+        <div id="notes-cn" class="subject-notes"></div>
+        <div id="notes-evs" class="subject-notes"></div>
+        <div id="notes-rmipr" class="subject-notes"></div>
       </div>
+      
+    
     </section>
+    <div id="container" class="container-fluid">
+      <!-- Sections will be dynamically added here -->
+  </div>
+
+    <!-- Assignments section -->
     <section id="assignments" class="subject-section">
       <h3>Assignments</h3>
-      <!-- Similar structure as Notes for Assignments -->
+      <div class="subject-list">
+        <!-- Dynamic assignment upload for each subject -->
+        <div id="assignments-dbms" class="subject-assignments"></div>
+        <div id="assignments-pai" class="subject-assignments"></div>
+        <div id="assignments-atc" class="subject-assignments"></div>
+        <div id="assignments-cn" class="subject-assignments"></div>
+        <div id="assignments-evs" class="subject-assignments"></div>
+        <div id="assignments-rmipr" class="subject-assignments"></div>
+      </div>
     </section>
+
+    <!-- Textbooks section -->
     <section id="textbooks" class="subject-section">
       <h3>Textbooks</h3>
-      <!-- Similar structure as Notes for Textbooks -->
+      <div class="subject-list">
+        <!-- Dynamic textbook upload for each subject -->
+        <div id="textbooks-dbms" class="subject-textbooks"></div>
+        <div id="textbooks-pai" class="subject-textbooks"></div>
+        <div id="textbooks-atc" class="subject-textbooks"></div>
+        <div id="textbooks-cn" class="subject-textbooks"></div>
+        <div id="textbooks-evs" class="subject-textbooks"></div>
+        <div id="textbooks-rmipr" class="subject-textbooks"></div>
+      </div>
     </section>
+
+    <!-- Old Question Papers section -->
     <section id="oldpapers" class="subject-section">
       <h3>Old Question Papers</h3>
-      <!-- Similar structure as Notes for Old Question Papers -->
+      <div class="subject-list">
+        <!-- Dynamic old question papers upload for each subject -->
+        <div id="oldpapers-dbms" class="subject-oldpapers"></div>
+        <div id="oldpapers-pai" class="subject-oldpapers"></div>
+        <div id="oldpapers-atc" class="subject-oldpapers"></div>
+        <div id="oldpapers-cn" class="subject-oldpapers"></div>
+        <div id="oldpapers-evs" class="subject-oldpapers"></div>
+        <div id="oldpapers-rmipr" class="subject-oldpapers"></div>
+      </div>
     </section>
   </div>
 
@@ -120,5 +161,8 @@
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <!-- Firebase Script -->
+  <script type="module" src="/script/fbdb.js"></script>
+  <script src='https://cdn.firebase.com/js/client/2.2.1/firebase.js'></script>
 </body>
 </html>
