@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>404 Not Found</title>
+  <link rel="icon" href="/favicon_package_v0.16/favicon.ico" type="image/x-icon">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <style>
+    /* Custom CSS for the 404 page */
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background-color: #f8f9fa;
+    }
+    .container {
+      text-align: center;
+    }
+    h1 {
+      font-size: 4em;
+      margin-bottom: 20px;
+      color: #dc3545;
+    }
+    h2{
+      font-size: medium;
+    }
+    p {
+      font-size: 1.5em;
+      color: #343a40;
+    }
+    @keyframes heartbeat {
+      0% {
+        transform: scale(1);
+      }
+      25% {
+        transform: scale(1.1);
+      }
+      50% {
+        transform: scale(1);
+      }
+      75% {
+        transform: scale(1.1);
+      }
+      100% {
+        transform: scale(1);
+      }
+    }
+    .heartbeat {
+      animation: heartbeat 1.5s infinite;
+    }
+    canvas {
+      border: 1px solid #333;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1 class="heartbeat">❤</h1>
+    <p>Sorry for the delay. Still working ...! will be there soon (Before external exams)</p>
+    <canvas id="gameCanvas" width="600" height="400"></canvas>
+  </div>
+
+  <script>
+    const canvas = document.getElementById("gameCanvas");
+    const ctx = canvas.getContext("2d");
+    const ballSize = 10;
+    let ballX = canvas.width / 2;
+    let ballY = canvas.height / 2;
+    let ballSpeedX = 3;
+    let ballSpeedY = 3;
+    const paddleWidth = 10;
+    const paddleHeight = 100;
+    const paddleMargin = 50;
+    let leftPaddleY = canvas.height / 2 - paddleHeight / 2;
+    let rightPaddleY = canvas.height / 2 - paddleHeight / 2;
+    const paddleSpeed = 10;
+    let scoreLeft = 0;
+    let scoreRight = 0;
+    const winningScore = 5;
+    let gameOver = false;
+
+    document.addEventListener("keydown", movePaddle);
+    canvas.addEventListener("mousemove", movePaddleMouse);
+
+    function movePaddle(event) {
+      if (!gameOver) {
+        if (event.key === "ArrowUp" && leftPaddleY > 0) {
+          leftPaddleY -= paddleSpeed;
+        } else if (event.key === "ArrowDown" && leftPaddleY < canvas.height - paddleHeight) {
+          leftPaddleY += paddleSpeed;
+        }
+        if (event.key === "w" && rightPaddleY > 0) {
+          rightPaddleY -= paddleSpeed;
+        } else if (event.key === "s" && rightPaddleY < canvas.height - paddleHeight) {
+          rightPaddleY += paddleSpeed;
+        }
+      }
+    }
+
+    function movePaddleMouse(event) {
+      const relativeY = event.clientY - canvas.offsetTop;
+      if (relativeY > 0 && relativeY < canvas.height) {
+        leftPaddleY = relativeY - paddleHeight / 2;
+      }
+    }
+
+    function resetBall() {
+      ballX = canvas.width / 2;
+      ballY = canvas.height / 2;
+      ballSpeedX = -ballSpeedX;
+      ballSpeedY = -ballSpeedY;
+    }
+
+    function draw() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      ctx.fillStyle = "#000";
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+      // Draw paddles
+      ctx.fillStyle = "#fff";
+      ctx.fillRect(paddleMargin, leftPaddleY, paddleWidth, paddleHeight);
+      ctx.fillRect(canvas.width - paddleMargin - paddleWidth, rightPaddleY, paddleWidth, paddleHeight);
+
+      // Draw ball
+      ctx.beginPath();
+      ctx.arc(ballX, ballY, ballSize, 0, Math.PI * 2);
+      ctx.fillStyle = "#fff";
+      ctx.fill();
+      ctx.closePath();
+
+      // Ball movement
+      ballX += ballSpeedX;
+      ballY += ballSpeedY;
+
+      // Collision with top and bottom walls
+      if (ballY + ballSize >= canvas.height || ballY - ballSize <= 0) {
+        ballSpeedY = -ballSpeedY;
+      }
+
+      // Collision with paddles
+      if (
+        (ballX - ballSize <= paddleMargin + paddleWidth) &&
+        (ballY + ballSize >= leftPaddleY && ballY - ballSize <= leftPaddleY + paddleHeight)
+      ) {
+        ballSpeedX = -ballSpeedX;
+      }
+
+      if (
+        (ballX + ballSize >= canvas.width - paddleMargin - paddleWidth) &&
+        (ballY + ballSize >= rightPaddleY && ballY - ballSize <= rightPaddleY + paddleHeight)
+      ) {
+        ballSpeedX = -ballSpeedX;
+      }
+
+      // Ball out of bounds
+      if (ballX - ballSize <= 0) {
+        scoreRight++;
+        if (scoreRight >= winningScore) {
+          gameOver = true;
+        } else {
+          resetBall();
+        }
+      }
+
+      if (ballX + ballSize >= canvas.width) {
+        scoreLeft++;
+        if (scoreLeft >= winningScore) {
+          gameOver = true;
+        } else {
+          resetBall();
+        }
+      }
+
+      // Draw scores
+      ctx.font = "30px Arial";
+      ctx.fillStyle = "#fff";
+      ctx.fillText(scoreLeft, canvas.width / 2 - 50, 50);
+      ctx.fillText(scoreRight, canvas.width / 2 + 25, 50);
+
+      if (gameOver) {
+        ctx.fillText("Game Over!", canvas.width / 2 - 100, canvas.height / 2);
+      } else {
+        requestAnimationFrame(draw);
+      }
+    }
+
+    draw();
+  </script>
+</body>
+</html>
