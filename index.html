@@ -27,7 +27,7 @@
     <a href="/labs/csharp.html" class="btn btn-csharp">Go to C# Lab</a>
     <a href="/labs/dbms.html" class="btn btn-dbms">Go to DBMS Lab</a>
     <a href="/labs/cn.html" class="btn btn-cn">Go to CN Lab</a>
-    <a href="/error/404.html" class="btn btn-cn">Go to AIML</a>
+    <a href="/404.html" class="btn btn-cn">Go to AIML</a>
    
 </div>
 
@@ -47,6 +47,21 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
 <script src="/script/index.js"></script>
+<script>
+    window.onload = function() {
+        var cb = document.getElementById('cookieBanner');
+        if (!localStorage.getItem('cookiesAccepted')) {
+            cb.style.display = 'block';
+        } else {
+            cb.style.display = 'none';
+        }
+    };
+
+    function acceptCookies() {
+        localStorage.setItem('cookiesAccepted', 'true');
+        document.getElementById('cookieBanner').style.display = 'none';
+    }
+</script>
 <!--Start of Tawk.to Script-->
 <script type="text/javascript" src="/script/tawk.js">
   
