@@ -24,18 +24,17 @@
     <h1>Welcome</h1>
     
     <p>for everyone and everything .</p>
-    <a href="/page/cshaarp.html" class="btn btn-csharp">Go to C# Lab</a>
-    <a href="/page/404.html" class="btn btn-dbms">Go to DBMS Lab</a>
-    <a href="/page/cn.html" class="btn btn-cn">Go to CN Lab</a>
-    <a href="/page/login.html" class="btn btn-cn">Go to AIML</a>
+    <a href="/labs/csharp.html" class="btn btn-csharp">Go to C# Lab</a>
+    <a href="/labs/dbms.html" class="btn btn-dbms">Go to DBMS Lab</a>
+    <a href="/labs/cn.html" class="btn btn-cn">Go to CN Lab</a>
+    <a href="/404.html" class="btn btn-cn">Go to AIML</a>
    
 </div>
 
 <div class="footer">
-    <!-- <span class="footer-icons"><i class="fab fa-twitter"></i></span> -->
-    <!-- <span class="footer-icons"><i class="fab fa-facebook"></i></span> -->
-    <!-- <span class="footer-icons"><i class="fab fa-linkedin"></i></span> -->
-    <span class="footer-icons"><i class="fab fa-github"></i></span>
+    <a href="https://github.com/K-Ananthamoorthy/aiml-smvitm" target="_blank" rel="noopener noreferrer">
+        <span class="footer-icons"><i class="fab fa-github"></i></span>
+    </a>
 </div>
 
 <div class="cookie-banner" id="cookieBanner">
@@ -48,6 +47,21 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
 <script src="/script/index.js"></script>
+<script>
+    window.onload = function() {
+        var cb = document.getElementById('cookieBanner');
+        if (!localStorage.getItem('cookiesAccepted')) {
+            cb.style.display = 'block';
+        } else {
+            cb.style.display = 'none';
+        }
+    };
+
+    function acceptCookies() {
+        localStorage.setItem('cookiesAccepted', 'true');
+        document.getElementById('cookieBanner').style.display = 'none';
+    }
+</script>
 <!--Start of Tawk.to Script-->
 <script type="text/javascript" src="/script/tawk.js">
   
