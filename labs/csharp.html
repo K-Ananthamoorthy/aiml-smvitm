@@ -403,14 +403,13 @@ namespace lab_program6
                     <div class="code-container">
                         <i class="fas fa-copy copy-icon" onclick="copyToClipboard('program8')"></i>
 <pre><code class="csharp" id="program8">using System;  
-  
-    public class Stack  
+public class Stack  
+{  
+    int top;  
+    int maxsize=10;  
+    int[] arr = new int[10];  
+    public static void Main()  
     {  
-        int top;  
-        int maxsize=10;  
-        int[] arr = new int[10];  
-        public static void Main()  
-        {  
         Stack st = new Stack();  
         st.top=-1;  
         int choice=0;  
@@ -428,7 +427,7 @@ namespace lab_program6
                 {   
                     st.push();  
                     break;  
-                }  
+                }
                 case 2:  
                 {  
                     st.pop();  
@@ -441,7 +440,7 @@ namespace lab_program6
                 }  
                 case 4:   
                 {  
-                Console.WriteLine("Exiting....");  
+                    Console.WriteLine("Exiting....");  
                     break;   
                 }  
                 default:  
@@ -451,14 +450,12 @@ namespace lab_program6
                 }   
             };  
         }  
-    }   
-      
+    }
     Boolean push ()  
     {  
         int val;      
         if(top == maxsize-1)   
-        {  
-              
+        {
             Console.WriteLine("\n Overflow");  
             return false;  
         }  
@@ -472,7 +469,6 @@ namespace lab_program6
             return true;  
         }   
     }   
-      
     Boolean pop ()   
     {   
         if (top == -1)   
@@ -480,9 +476,7 @@ namespace lab_program6
             Console.WriteLine("Underflow");  
             return false;  
         }  
-          
         else  
-          
         {  
             top = top -1;  
             Console.WriteLine("Item popped");  
@@ -490,18 +484,13 @@ namespace lab_program6
         }  
     }   
     void show()  
-    {  
-          
+    {
         for (int i=top;i>=0;i--)  
-        {  
-            Console.WriteLine(arr[i]);  
-        }  
+            Console.WriteLine(arr[i]);    
         if(top == -1)   
-        {  
             Console.WriteLine("Stack is empty");  
-        }  
     }  
-    }  </code></pre>
+}</code></pre>
                 </div>
                 </div>
             </div>
@@ -516,59 +505,51 @@ namespace lab_program6
                     <h5 class="card-title"> Program 9</h5>
                     <div class="code-container">
                         <i class="fas fa-copy copy-icon" onclick="copyToClipboard('program9')"></i>
-<pre><code class="csharp" id="program9">
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-    using System.Threading.Tasks;
-    
-    namespace Lab_program9
+<pre><code class="csharp" id="program9">using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+namespace Lab_program9
+{
+    public class Complex
     {
-        public class Complex
+        public int real;
+        public int imaginary;
+        public Complex(int real, int imaginary)
         {
-            public int real;
-            public int imaginary;
-    
-            public Complex(int real, int imaginary)
-            {
-                this.real = real;
-                this.imaginary = imaginary;
-            }
-    
-            public static Complex operator +(Complex c1, Complex c2)
-            {
-                return new Complex(c1.real + c2.real, c1.imaginary + c2.imaginary);
-            }
+            this.real = real;
+            this.imaginary = imaginary;
         }
-    
-        class Program
+        public static Complex operator +(Complex c1, Complex c2)
         {
-            static void Main(string[] args)
-            {
-                Console.WriteLine("Enter the first complex number:");
-                Console.Write("Enter the Real Part: ");
-                int real1 = Convert.ToInt32(Console.ReadLine());
-                Console.Write("Enter the Imaginary Part: ");
-                int imaginary1 = Convert.ToInt32(Console.ReadLine());
-                Complex num1 = new Complex(real1, imaginary1);
-    
-                Console.WriteLine("Enter the second complex number:");
-                Console.Write("Enter the Real Part: ");
-                int real2 = Convert.ToInt32(Console.ReadLine());
-                Console.Write("Enter the Imaginary Part: ");
-                int imaginary2 = Convert.ToInt32(Console.ReadLine());
-                Complex num2 = new Complex(real2, imaginary2);
-                
-                Console.WriteLine("\n Entered complex Numbers are as Follows: ");
-                Console.WriteLine("Num 1 : {0} + {1}i", num1.real, num1.imaginary);
-                Console.WriteLine("Num 2:  {0} + {1}i", num2.real, num2.imaginary);
-    
-                Complex sum = num1 + num2;
-                Console.WriteLine("The sum of the two complex numbers is: {0} + {1}i", sum.real, sum.imaginary);
-                Console.ReadKey();
-            }
+            return new Complex(c1.real + c2.real, c1.imaginary + c2.imaginary);
         }
-    }</code></pre>
+    }
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Console.WriteLine("Enter the first complex number:");
+            Console.Write("Enter the Real Part: ");
+            int real1 = Convert.ToInt32(Console.ReadLine());
+            Console.Write("Enter the Imaginary Part: ");
+            int imaginary1 = Convert.ToInt32(Console.ReadLine());
+            Complex num1 = new Complex(real1, imaginary1);
+            Console.WriteLine("Enter the second complex number:");
+            Console.Write("Enter the Real Part: ");
+            int real2 = Convert.ToInt32(Console.ReadLine());
+            Console.Write("Enter the Imaginary Part: ");
+            int imaginary2 = Convert.ToInt32(Console.ReadLine());
+            Complex num2 = new Complex(real2, imaginary2);
+            Console.WriteLine("\n Entered complex Numbers are as Follows: ");
+            Console.WriteLine("Num 1 : {0} + {1}i", num1.real, num1.imaginary);
+            Console.WriteLine("Num 2:  {0} + {1}i", num2.real, num2.imaginary);
+            Complex sum = num1 + num2;
+            Console.WriteLine("The sum of the two complex numbers is: {0} + {1}i", sum.real, sum.imaginary);
+            Console.ReadKey();
+        }
+    }
+}</code></pre>
 </div>
                 </div>
             </div>
