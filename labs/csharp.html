@@ -556,6 +556,89 @@ namespace Lab_program9
         </div>
     </div>
 
+    <!-- Program 10 --> 
+    <div>
+        <div class="col-md-12">
+            <div class="card program-card">
+                <div class="card-body">
+                    <h5 class="card-title"> Program 10</h5>
+                    <div class="code-container">
+                        <i class="fas fa-copy copy-icon" onclick="copyToClipboard('program10')"></i>
+<pre><code class="csharp" id="program10">using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+namespace lab_program_10
+{
+    class Shape
+    {
+        public virtual void draw()
+        {
+            Console.WriteLine("Drawing a shape");
+        }
+        public virtual void erase()
+        {
+            Console.WriteLine("Erasing a shape");
+        }
+    }
+    class Circle : Shape
+    {
+        public override void draw()
+        {
+            Console.WriteLine("Drawing a circle");
+        }
+        public override void erase()
+        {
+            Console.WriteLine("Erasing a circle");
+        }
+    }
+    class Triangle : Shape
+    {
+        public override void draw()
+        {
+            Console.WriteLine("Drawing a triangle");
+        }
+        public override void erase()
+        {
+            Console.WriteLine("Erasing a triangle");
+        }
+    }
+    class Square : Shape
+    {
+        public override void draw()
+        {
+            Console.WriteLine("Drawing a square");
+        }
+        public override void erase()
+        {
+            Console.WriteLine("Erasing a square");
+        }
+    }
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Shape[] shapes = new Shape[3];
+            shapes[0] = new Circle();
+            shapes[1] = new Triangle();
+            shapes[2] = new Square();
+            foreach (Shape shape in shapes)
+            {
+                shape.draw();
+                shape.erase();
+            }
+            Console.ReadKey();
+        }
+    }
+}</code></pre>
+</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    
     <!-- Program 11 -->
     <div>
         <div class="col-md-12">
@@ -619,7 +702,7 @@ namespace Lab_program_11
         {
             double side1 = 13, side2 = 9, side3=10;
             Shape triangle = new Triangle(side1, side2,side3);
-            Console.WriteLine("The sides of circle are side1:"+side1+" side2:"+side2+" side3:"+side3+"\nThe area of the triangle is: " + triangle.calculateArea()+ "\nThe perimeter of the triangle is: " + triangle.calculatePerimeter() + ".");
+            Console.WriteLine("The sides of Triangle are side1:"+side1+" side2:"+side2+" side3:"+side3+"\nThe area of the triangle is: " + triangle.calculateArea()+ "\nThe perimeter of the triangle is: " + triangle.calculatePerimeter() + ".");
             double radius = 3;
             Shape circle = new Circle(radius);
             Console.WriteLine("\nThe radius of the circle is: " + radius+ "\nThe area of the circle is: " + circle.calculateArea()+ "\nThe perimeter of the circle is: " + circle.calculatePerimeter() + ".");
