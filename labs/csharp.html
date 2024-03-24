@@ -814,7 +814,7 @@ namespace Lab_Program_12
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <!-- Highlight.js for syntax highlighting -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/highlight.min.js"></script>
-<script>hljs.initHighlightingOnLoad();</script>
+<script>hljs.highlightAll();</script>
 
 <script>
     function copyToClipboard(elementId) {
@@ -835,6 +835,49 @@ namespace Lab_Program_12
         }, 2000);
     }
 </script>
+<script>
+    window.addEventListener('DOMContentLoaded', function() {
+        // Get the program number from the URL hash
+        var programNumber = parseInt(window.location.hash.substring(1));
+
+        // Function to copy program code to clipboard
+        function copyToClipboard(code) {
+            var textArea = document.createElement("textarea");
+            textArea.value = code;
+            document.body.appendChild(textArea);
+            textArea.select();
+            document.execCommand('copy');
+            document.body.removeChild(textArea);
+
+            // Optionally, you can show a toast message indicating successful copying
+            var toast = document.getElementById('dark-toast');
+            toast.style.display = 'block';
+            toast.innerText = 'Copied to clipboard!';
+
+            setTimeout(function () {
+                toast.style.display = 'none';
+            }, 2000);
+        }
+
+        // Check if a valid program number is provided in the URL hash
+        if (!isNaN(programNumber) && programNumber > 0 && programNumber <= 12) {
+            // Construct the ID of the program code element
+            var programId = 'program' + programNumber;
+
+            // Get the program code
+            var programCodeElement = document.getElementById(programId);
+            if (programCodeElement) {
+                var programCode = programCodeElement.innerText;
+                // Copy the program code to clipboard
+                copyToClipboard(programCode);
+            }
+        } else {
+            // Optionally handle invalid program number here
+            console.error('Invalid program number');
+        }
+    });
+</script>
+
 
 </body>
 </html>
