@@ -402,123 +402,94 @@ namespace lab_program6
                     <h5 class="card-title"> Program 8</h5>
                     <div class="code-container">
                         <i class="fas fa-copy copy-icon" onclick="copyToClipboard('program8')"></i>
-<pre><code class="csharp" id="program8">using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-namespace ConsoleApplication
-{
-    public class Stack
-    {
-        public static void Main(string[] args)
-        {
-            stack st = new stack();
-            while (true)
-            {
-                System.Console.WriteLine("\nStack MENU(size -- 10)");
-                System.Console.WriteLine("1. Add an element");
-                System.Console.WriteLine("2. See the Top element.");
-                System.Console.WriteLine("3. Remove top element.");
-                System.Console.WriteLine("4. Display stack elements.");
-                System.Console.WriteLine("5. Exit");
-                System.Console.Write("Select your choice: ");
-                int choice = Convert.ToInt32(System.Console.ReadLine());
-                switch (choice)
-                {
-                    case 1:
-                        System.Console.WriteLine("Enter an Element : ");
-                        st.Push(Console.ReadLine());
-                        break;
-                    case 2:
-                        System.Console.WriteLine("Top element is: {0}", st.Peek());
-                        break;
-                    case 3:
-                        System.Console.WriteLine("Element removed: {0}", st.Pop());
-                        break;
-                    case 4:
-                        st.Display();
-                        break;
-                    case 5:
-                        System.Environment.Exit(1);
-                        break;
+<pre><code class="csharp" id="program8">using System;  
+public class Stack  
+{  
+    int top;  
+    int maxsize=10;  
+    int[] arr = new int[10];  
+    public static void Main()  
+    {  
+        Stack st = new Stack();  
+        st.top=-1;  
+        int choice=0;  
+        Console.WriteLine("*********Stack operations using array*********");  
+        Console.WriteLine("\n----------------------------------------------\n");  
+        while(choice != 4)  
+        {  
+            Console.WriteLine("Chose one from the below options...\n");  
+            Console.WriteLine("\n1.Push\n2.Pop\n3.Show\n4.Exit");  
+            Console.WriteLine("\n Enter your choice \n");         
+            choice = Convert.ToInt32(Console.ReadLine());  
+            switch(choice)  
+            {  
+                case 1:  
+                {   
+                    st.push();  
+                    break;  
                 }
-            }
-        }
+                case 2:  
+                {  
+                    st.pop();  
+                    break;  
+                }  
+                case 3:  
+                {  
+                    st.show();  
+                    break;  
+                }  
+                case 4:   
+                {  
+                    Console.WriteLine("Exiting....");  
+                    break;   
+                }  
+                default:  
+                {  
+                    Console.WriteLine("Please Enter valid choice ");  
+                    break;  
+                }   
+            };  
+        }  
     }
-    public interface StackADT
+    Boolean push ()  
+    {  
+        int val;      
+        if(top == maxsize-1)   
+        {
+            Console.WriteLine("\n Overflow");  
+            return false;  
+        }  
+        else   
+        {  
+            Console.WriteLine("Enter the value?");  
+            val = Convert.ToInt32(Console.ReadLine());        
+            top = top +1;   
+            arr[top] = val;  
+            Console.WriteLine("Item pushed");  
+            return true;  
+        }   
+    }   
+    Boolean pop ()   
+    {   
+        if (top == -1)   
+        {  
+            Console.WriteLine("Underflow");  
+            return false;  
+        }  
+        else  
+        {  
+            top = top -1;  
+            Console.WriteLine("Item popped");  
+            return true;  
+        }  
+    }   
+    void show()  
     {
-        Boolean isEmpty();
-        void Push(Object element);
-        Object Pop();
-        Object Peek();
-        void Display();
-    }
-    public class stack : StackADT
-    {
-        private int StackSize;
-        public int StackSizeSet
-        {
-            get { return StackSize; }
-            set { StackSize = value; }
-        }
-        public int top;
-        public Object[] item;
-        public stack()
-        {
-            StackSizeSet = 10;
-            item = new Object[StackSizeSet];
-            top = -1;
-        }
-        public stack(int capacity)
-        {
-            StackSizeSet = capacity;
-            item = new Object[StackSizeSet];
-            top = -1;
-        }
-        public bool isEmpty()
-        {
-            if (top == -1)
-                return true;
-            return false;
-        }
-        public void Push(object element)
-        {
-            if (top == (StackSize - 1))
-                System.Console.WriteLine("Stack is full!");
-            else
-            {
-                item[++top] = element;
-                System.Console.WriteLine("Item pushed successfully!");
-            }
-        }
-        public object Pop()
-        {
-            if (isEmpty())
-            {
-                System.Console.WriteLine("Stack is empty!");
-                return "No elements";
-            }
-            else
-                return item[top--];
-        }
-        public object Peek()
-            {
-            if (isEmpty())
-            {
-                System.Console.WriteLine("Stack is empty!");
-                return "No elements";
-            }
-            else
-                return item[top];
-        }
-        public void Display()
-        {
-            for (int i = top; i > -1; i--)
-                System.Console.WriteLine("Item {0}: {1}", (i + 1), item[i]);
-        }
-    }
+        for (int i=top;i>=0;i--)  
+            Console.WriteLine(arr[i]);    
+        if(top == -1)   
+            Console.WriteLine("Stack is empty");  
+    }  
 }</code></pre>
                 </div>
                 </div>
@@ -534,8 +505,7 @@ namespace ConsoleApplication
                     <h5 class="card-title"> Program 9</h5>
                     <div class="code-container">
                         <i class="fas fa-copy copy-icon" onclick="copyToClipboard('program9')"></i>
-<pre><code class="csharp" id="program9">using System;
-using System.Collections.Generic;
+<pre><code class="csharp" id="program9">using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -560,20 +530,27 @@ namespace Lab_program9
         static void Main(string[] args)
         {
             Console.WriteLine("Enter the first complex number:");
+            Console.Write("Enter the Real Part: ");
             int real1 = Convert.ToInt32(Console.ReadLine());
+            Console.Write("Enter the Imaginary Part: ");
             int imaginary1 = Convert.ToInt32(Console.ReadLine());
             Complex num1 = new Complex(real1, imaginary1);
             Console.WriteLine("Enter the second complex number:");
+            Console.Write("Enter the Real Part: ");
             int real2 = Convert.ToInt32(Console.ReadLine());
+            Console.Write("Enter the Imaginary Part: ");
             int imaginary2 = Convert.ToInt32(Console.ReadLine());
             Complex num2 = new Complex(real2, imaginary2);
+            Console.WriteLine("\n Entered complex Numbers are as Follows: ");
+            Console.WriteLine("Num 1 : {0} + {1}i", num1.real, num1.imaginary);
+            Console.WriteLine("Num 2:  {0} + {1}i", num2.real, num2.imaginary);
             Complex sum = num1 + num2;
             Console.WriteLine("The sum of the two complex numbers is: {0} + {1}i", sum.real, sum.imaginary);
             Console.ReadKey();
         }
     }
 }</code></pre>
-                </div>
+</div>
                 </div>
             </div>
         </div>
@@ -661,6 +638,7 @@ namespace lab_program_10
         </div>
     </div>
 
+    
     <!-- Program 11 -->
     <div>
         <div class="col-md-12">
@@ -724,7 +702,7 @@ namespace Lab_program_11
         {
             double side1 = 13, side2 = 9, side3=10;
             Shape triangle = new Triangle(side1, side2,side3);
-            Console.WriteLine("The sides of circle are side1:"+side1+" side2:"+side2+" side3:"+side3+"\nThe area of the triangle is: " + triangle.calculateArea()+ "\nThe perimeter of the triangle is: " + triangle.calculatePerimeter() + ".");
+            Console.WriteLine("The sides of Triangle are side1:"+side1+" side2:"+side2+" side3:"+side3+"\nThe area of the triangle is: " + triangle.calculateArea()+ "\nThe perimeter of the triangle is: " + triangle.calculatePerimeter() + ".");
             double radius = 3;
             Shape circle = new Circle(radius);
             Console.WriteLine("\nThe radius of the circle is: " + radius+ "\nThe area of the circle is: " + circle.calculateArea()+ "\nThe perimeter of the circle is: " + circle.calculatePerimeter() + ".");
