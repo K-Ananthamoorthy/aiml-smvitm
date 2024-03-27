@@ -144,10 +144,10 @@ CREATE TABLE Lib_prog(Prog_id INTEGER PRIMARY KEY, Prog_name VARCHAR(20), Addres
 INSERT INTO Lib_prog VALUES(201, 'CS', 'Block 1'); 
 
 CREATE TABLE Book_copies(Book_id INTEGER, Prog_id INTEGER, No_of_copies INTEGER, PRIMARY KEY (Book_id, Prog_id), FOREIGN KEY(Book_id) REFERENCES Book(Book_id) ON DELETE CASCADE, FOREIGN KEY (Prog_id) REFERENCES Lib_prog(Prog_id) ON DELETE CASCADE); 
-INSERT INTO Book_copies VALUES(101,212,3);
+INSERT INTO Book_copies VALUES(101,201,3);
 
 CREATE TABLE Book_lending (Book_id INTEGER, Prog_id INTEGER, Card_no INTEGER, Date_out DATE, Due_date DATE, PRIMARY KEY(Book_id, Prog_id, Card_no), FOREIGN KEY(Book_id) REFERENCES Book(Book_id) ON DELETE CASCADE, FOREIGN KEY(Prog_id) REFERENCES Lib_prog(prog_id) ON DELETE CASCADE);
-INSERT INTO Book_lending VALUES (101,212, 20 , '2017-05-03', '2017-05-15');</code></pre>
+INSERT INTO Book_lending VALUES (101,201, 20 , '2017-05-03', '2017-05-15');</code></pre>
                     </div>
                     <hr class="aa">
                     <h5 class="card-title">SQL QUERIES</h5>
@@ -207,7 +207,7 @@ ORDERS (Ord_No, Purchase_Amt, Ord_Date, Customer_id, Salesman_id)
 <pre><code class="sql" id="prg2-1">CREATE TABLE Salesman (Salesman_Id INT(4) PRIMARY KEY, Name VARCHAR (20), City VARCHAR (20), Commission VARCHAR (20)); 
 INSERT INTO Salesman VALUES (1000, 'John','Bangalore','25 %'); 
 
-CREATE TABLE Customer (Customer_Id INTEGER PRIMARY KEY, Cust_Name VARCHAR (20), City VARCHAR (20), Grade INTEGER, Salesman_Id INT(4), FOREIGN KEY (Salesman_Id) REFERENCES Salesman (Salesman_Id) ON DELETE NULL); 
+CREATE TABLE Customer (Customer_Id INTEGER PRIMARY KEY, Cust_Name VARCHAR (20), City VARCHAR (20), Grade INTEGER, Salesman_Id INT(4), FOREIGN KEY (Salesman_Id) REFERENCES Salesman (Salesman_Id) ON DELETE CASCADE); 
 INSERT INTO Customer VALUES (10, 'Preethi','Bangalore', 100, 1000); 
 
 CREATE TABLE Orders (Ord_No INTEGER PRIMARY KEY, Purchase_Amt INTEGER, Ord_Date DATE, Customer_Id INTEGER, FOREIGN KEY (Customer_Id) REFERENCES Customer (Customer_Id) ON DELETE CASCADE, Salesman_Id INT(4), FOREIGN KEY (Salesman_Id) REFERENCES Salesman (Salesman_Id) ON DELETE CASCADE); 
