@@ -21,7 +21,7 @@
 </head>
 
 <body>
-    <div class="container mt-5" id="login-container">
+    <div class="container mt-5">
         <div class="row justify-content-center">
             <div class="col-md-6">
                 <div class="card">
@@ -48,27 +48,17 @@
     <script>
         // Initialize Firebase
         const firebaseConfig = {
-            apiKey: "AIzaSyCN0VLc3wYAeKBk06g-HVtE4dDPcEZo6xk",
-  authDomain: "aiml-smvitm.firebaseapp.com",
-  projectId: "aiml-smvitm",
-  storageBucket: "aiml-smvitm.appspot.com",
-  messagingSenderId: "867145474581",
-  appId: "1:867145474581:web:a2e294081b458bdb69e41c",
-  measurementId: "G-64CF103MLC"
+            apiKey: "YOUR_API_KEY",
+            authDomain: "YOUR_AUTH_DOMAIN",
+            projectId: "YOUR_PROJECT_ID",
+            storageBucket: "YOUR_STORAGE_BUCKET",
+            messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
+            appId: "YOUR_APP_ID",
+            measurementId: "YOUR_MEASUREMENT_ID"
         };
         firebase.initializeApp(firebaseConfig);
 
-        // Check if user is already logged in
-        firebase.auth().onAuthStateChanged(function(user) {
-            if (user) {
-                // User is signed in, redirect to aiml.html
-                window.location.href = "aiml.html";
-            }
-        });
-
         function googleSignIn() {
-            // Hide login UI
-            document.getElementById('login-container').style.display = 'none';
             // Show loading spinner
             document.getElementById('loading-spinner').style.display = 'block';
             const provider = new firebase.auth.GoogleAuthProvider();
@@ -87,8 +77,6 @@
         }).catch((error) => {
             // Hide loading spinner if there's an error
             document.getElementById('loading-spinner').style.display = 'none';
-            // Show login UI again
-            document.getElementById('login-container').style.display = 'block';
             // Handle Errors here.
             const errorCode = error.code;
             const errorMessage = error.message;
