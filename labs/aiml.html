@@ -164,5 +164,28 @@
   <!-- Firebase Script -->
   <script type="module" src="/script/fbdb.js"></script>
   <script src='https://cdn.firebase.com/js/client/2.2.1/firebase.js'></script>
+  <script src="https://www.gstatic.com/firebasejs/9.6.2/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.2/firebase-auth-compat.js"></script>
+    <script>
+        // Initialize Firebase
+        const firebaseConfig = {
+          apiKey: "AIzaSyCN0VLc3wYAeKBk06g-HVtE4dDPcEZo6xk",
+  authDomain: "aiml-smvitm.firebaseapp.com",
+  projectId: "aiml-smvitm",
+  storageBucket: "aiml-smvitm.appspot.com",
+  messagingSenderId: "867145474581",
+  appId: "1:867145474581:web:a2e294081b458bdb69e41c",
+  measurementId: "G-64CF103MLC"
+        };
+        firebase.initializeApp(firebaseConfig);
+
+        // Check authentication state
+        firebase.auth().onAuthStateChanged(function(user) {
+            if (!user) {
+                // User is not authenticated, redirect to login page
+                window.location.href = "/labs/login.html";
+            }
+        });
+    </script>
 </body>
 </html>
