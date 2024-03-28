@@ -17,6 +17,20 @@
             transform: translate(-50%, -50%);
             z-index: 9999;
         }
+
+        body {
+            background-color: #8EC5FC;
+            background-image: linear-gradient(62deg, #8EC5FC 0%, #E0C3FC 100%);
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            height: 100vh;
+            margin: 0;
+            /* Remove default margin */
+            padding: 0;
+            /* Remove default padding */
+            overflow: hidden;
+        }
     </style>
 </head>
 
@@ -49,17 +63,17 @@
         // Initialize Firebase
         const firebaseConfig = {
             apiKey: "AIzaSyCN0VLc3wYAeKBk06g-HVtE4dDPcEZo6xk",
-  authDomain: "aiml-smvitm.firebaseapp.com",
-  projectId: "aiml-smvitm",
-  storageBucket: "aiml-smvitm.appspot.com",
-  messagingSenderId: "867145474581",
-  appId: "1:867145474581:web:a2e294081b458bdb69e41c",
-  measurementId: "G-64CF103MLC"
+            authDomain: "aiml-smvitm.firebaseapp.com",
+            projectId: "aiml-smvitm",
+            storageBucket: "aiml-smvitm.appspot.com",
+            messagingSenderId: "867145474581",
+            appId: "1:867145474581:web:a2e294081b458bdb69e41c",
+            measurementId: "G-64CF103MLC"
         };
         firebase.initializeApp(firebaseConfig);
 
         // Check if user is already logged in
-        firebase.auth().onAuthStateChanged(function(user) {
+        firebase.auth().onAuthStateChanged(function (user) {
             if (user) {
                 // User is signed in, redirect to aiml.html
                 window.location.href = "aiml.html";
