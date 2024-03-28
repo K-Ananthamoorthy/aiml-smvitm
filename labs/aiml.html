@@ -30,6 +30,31 @@
     .container-fluid {
       padding-top: 70px; /* Adjust based on navbar height */
     }
+    .subject-folder {
+      cursor: pointer;
+      margin-bottom: 10px;
+      padding: 10px;
+      border: 1px solid #ced4da;
+      border-radius: 5px;
+      background-color: #f8f9fa;
+    }
+  
+    .subject-folder:hover {
+      background-color: #e9ecef;
+    }
+  
+    .subfolder {
+      display: none;
+    }
+  
+    .subfolder.active {
+      display: block;
+    }
+  
+    .subject-folder.active {
+      background-color: #e9ecef;
+    }
+  
     .subject-section {
       margin-bottom: 40px;
       border: 1px solid #ddd; /* Gray border */
@@ -97,19 +122,8 @@
     <section id="notes" class="subject-section">
       
       <h3>Notes &IMP questions</h3>
-      <div class="subject-list">
-        <!-- Dynamic notes upload for each subject -->
-        <div id="notes-dbms" class="subject-notes"></div>
-        <div id="notes-pai" class="subject-notes"></div>
-        <div id="notes-atc" class="subject-notes"></div>
-        <div id="notes-cn" class="subject-notes"></div>
-        <div id="notes-evs" class="subject-notes"></div>
-        <div id="notes-rmipr" class="subject-notes"></div>
-      </div>
-      
-    
-    </section>
-    <div id="container" class="container-fluid">
+    <!-- Section for rendering subject folders -->
+    <div id="folders" class="subject-section subject-folders"></div>
       <!-- Sections will be dynamically added here -->
   </div>
 
@@ -187,5 +201,17 @@
             }
         });
     </script>
+    <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const subjectFolders = document.querySelectorAll('.subject-folder');
+      subjectFolders.forEach(folder => {
+        folder.addEventListener('click', () => {
+          folder.classList.toggle('active');
+          const subfolder = folder.nextElementSibling;
+          subfolder.classList.toggle('active');
+        });
+      });
+    });
+  </script>
 </body>
 </html>
