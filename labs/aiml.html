@@ -44,11 +44,16 @@
     }
   
     .subfolder {
-      display: none;
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.5s ease-out; /* Add transition */
     }
-  
+    
     .subfolder.active {
-      display: block;
+      max-height: 500px; /* Adjust this value based on your needs */
+    }
+    .subject-container {
+      overflow: auto;
     }
   
     .subject-folder.active {
@@ -204,11 +209,11 @@
     </script>
     <script>
     document.addEventListener("DOMContentLoaded", () => {
-      const subjectFolders = document.querySelectorAll('.subject-folder');
-      subjectFolders.forEach(folder => {
+      // JavaScript
+      document.querySelectorAll('.subject-folder').forEach(folder => {
         folder.addEventListener('click', () => {
-          folder.classList.toggle('active');
           const subfolder = folder.nextElementSibling;
+          folder.classList.toggle('active');
           subfolder.classList.toggle('active');
         });
       });

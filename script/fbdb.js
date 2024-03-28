@@ -35,7 +35,8 @@ async function renderUploadedFiles(subject) {
   renderUploadedFiles(subject);
 });
 
-// Function to render subject folders
+let currentOpenFolder = null;
+
 async function renderSubjectFolders() {
   const foldersDiv = document.getElementById('folders');
   if (!foldersDiv) {
@@ -48,25 +49,52 @@ async function renderSubjectFolders() {
     notesList.prefixes.forEach((subjectRef) => {
       const subjectName = subjectRef.name.split('/').pop(); // Extract subject name from folder path
       const subjectDiv = document.createElement('div');
+      const filesDiv = document.createElement('div');
+      filesDiv.classList.add('subfolder');
       subjectDiv.innerHTML = `<h3>${subjectName.toUpperCase()}</h3>`;
       subjectDiv.classList.add('subject-folder');
+
+      // Append the subject name and files div to the subject div
+      subjectDiv.appendChild(filesDiv);
+
+      // Append the subject div to the folders div
       foldersDiv.appendChild(subjectDiv);
+
       subjectDiv.addEventListener('click', async () => {
-        const filesList = await listAll(subjectRef);
-        const filesLinks = await Promise.all(filesList.items.map(async (itemRef) => {
-          const url = await getDownloadURL(itemRef);
-          const fileName = itemRef.name.split('/').pop(); // Extract file name from file path
-          return `<li><a href="${url}" target="_blank">${fileName}</a></li>`;
-        }));
-        if (!subjectDiv.querySelector('ul')) {
-          const ul = document.createElement('ul');
-          ul.innerHTML = filesLinks.join('');
-          subjectDiv.appendChild(ul);
+        const transitionEndHandler = (event) => {
+          if (event.propertyName === 'max-height') {
+            event.target.innerHTML = '';
+            event.target.removeEventListener('transitionend', transitionEndHandler);
+          }
+        };
+      
+        if (currentOpenFolder && currentOpenFolder !== filesDiv) {
+          // If there is a currently open folder and it's not the clicked one, close it
+          currentOpenFolder.style.maxHeight = null;
+          currentOpenFolder.classList.remove('active');
+          currentOpenFolder.addEventListener('transitionend', transitionEndHandler);
         }
+        if (filesDiv.classList.contains('active')) {
+          // If the clicked folder is currently open, close it
+          filesDiv.style.maxHeight = null;
+          filesDiv.addEventListener('transitionend', transitionEndHandler);
+        } else {
+          // If the clicked folder is not currently open, open it
+          const filesList = await listAll(subjectRef);
+          const filesLinks = await Promise.all(filesList.items.map(async (itemRef) => {
+            const url = await getDownloadURL(itemRef);
+            const fileName = itemRef.name;
+            return `<li><a href="${url}" target="_blank">${fileName}</a></li>`;
+          }));
+          filesDiv.innerHTML = '<ul>' + filesLinks.join('') + '</ul>';
+          filesDiv.style.maxHeight = `${filesDiv.scrollHeight}px`;
+          currentOpenFolder = filesDiv; // Set the clicked folder as the currently open one
+        }
+        filesDiv.classList.toggle('active'); // Toggle the active class
       });
     });
   } catch (error) {
-    console.error('Error rendering subject folders:', error);
+    console.error('Failed to render subject folders:', error);
   }
 }
 
