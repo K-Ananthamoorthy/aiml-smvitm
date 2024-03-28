@@ -1,8 +1,26 @@
 body {
-    background-color: #f8f9fa;
+    /* background-color: #f8f9fa; */
     color: #495057;
     padding-bottom: 70px; /* Adjusted for the fixed footer */
 }
+
+body {
+    background-color: #8EC5FC;
+    background-image: linear-gradient(62deg, #8EC5FC 0%, #E0C3FC 100%);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    height: 100vh;
+    margin: 0; /* Remove default margin */
+    padding: 0; /* Remove default padding */
+    overflow: hidden;
+}
+
+/* Additional styling for the container */
+.container {
+    padding-top: 100px; /* Adjust as needed based on your navbar height */
+}
+
 .navbar {
     background-color: #007bff;
     color: white;
@@ -26,6 +44,32 @@ body {
     opacity: 0;
     animation: fadeIn 1s forwards;
 }
+
+.btn-green{
+    background-color: green;
+    color: #ffffff;
+    border: none;
+    padding: 12px 25px;
+    font-size: 18px;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: background-color 0.3s ease-in-out;
+    margin: 10px;
+    opacity: 0;
+    animation: fadeIn 1s forwards;
+    /* transition: border ease 1s; */
+    
+}
+
+.container h1{
+    color: black;
+}
+
+.btn-green:hover{
+    background-color: rgb(30, 148, 15);
+    /* border: 2px solid white; */
+}
+
 .btn-csharp:hover, .btn-dbms:hover, .btn-cn:hover {
     background-color: #0056b3;
 }
