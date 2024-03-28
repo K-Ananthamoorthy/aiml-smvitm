@@ -19,26 +19,6 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const storage = getStorage(app);
 
-// Function to upload files to Firebase Storage
-function uploadFile(subject) {
-  const fileInput = document.getElementById(`file-upload-${subject}`);
-  const file = fileInput.files[0];
-  const storageRef = ref(storage, `notes/${subject}/${file.name}`);
-  const uploadTask = uploadBytes(storageRef, file);
-  uploadTask.on('state_changed', 
-    (snapshot) => {
-      // Track upload progress
-    },
-    (error) => {
-      // Handle unsuccessful upload
-      console.error('Error uploading file:', error);
-    },
-    () => {
-      // Handle successful upload
-      console.log('File uploaded successfully!');
-    }
-  );
-}
 
 // Function to render uploaded files for each subject
 async function renderUploadedFiles(subject) {
