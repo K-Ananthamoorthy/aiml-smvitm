@@ -3,17 +3,10 @@
     "start": "node server.js",
     "build": "npm install"
   },
-  "devDependencies": {
-    "dotenv-webpack": "^8.0.1"
-  },
   "dependencies": {
-    "chokidar": "^3.6.0",
     "dotenv": "^16.4.5",
     "express": "^4.19.2",
-    "glob-parent": "^6.0.2",
     "netlify-lambda": "^2.0.16",
-    "serverless-http": "^3.2.0",
-    "watchpack-chokidar2": "^2.0.1",
-    "webpack": "^5.91.0"
+    "serverless-http": "^3.2.0"
   }
 }
