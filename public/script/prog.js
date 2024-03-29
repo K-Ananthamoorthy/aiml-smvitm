@@ -18,17 +18,30 @@ document.addEventListener('DOMContentLoaded', async () => {
     const querySnapshot = await getDocs(csharpProgramsRef);
     querySnapshot.forEach((doc) => {
       const programData = doc.data();
-      // Iterate over each array of C# code snippets
       programData.cs.forEach((codeSnippet) => {
         console.log(codeSnippet);
+        const formattedCode = formatCode(codeSnippet);
         const codeBlock = document.createElement("pre");
         codeBlock.className = "code-block";
-        codeBlock.textContent = codeSnippet;
+        codeBlock.innerHTML = formattedCode;
         document.getElementById("csharp-programs").appendChild(codeBlock);
       });
     });
   }
 
+  // Format the code snippet to maintain indentation and line breaks
+  function formatCode(code) {
+    // Replace newlines with <br> tags
+    code = code.replace(/\n/g, "<br>");
+
+    // Add spacing after specific characters
+    code = code.replace(/;/g, ";<br>&nbsp;&nbsp;");
+    code = code.replace(/{/g, "{<br>&nbsp;&nbsp;");
+    code = code.replace(/}/g, "<br>}");
+
+    return code;
+  }
+
   // Call the function to display C# programs when the page loads
-  displayCSharpPrograms();
+  window.onload = displayCSharpPrograms;
 });
