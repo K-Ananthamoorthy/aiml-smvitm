@@ -32,11 +32,12 @@ body {
     animation: fadeIn 1s forwards;
 }
 .btn-csharp, .btn-dbms, .btn-cn {
+
     background-color: #007bff;
     color: #ffffff;
     border: none;
     padding: 10px 20px;
-    font-size: 18px;
+    font-size: 0.65rem;
     border-radius: 5px;
     text-decoration: none;
     transition: background-color 0.3s ease-in-out;
