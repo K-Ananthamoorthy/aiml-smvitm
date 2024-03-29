@@ -9,15 +9,11 @@
   <!-- Custom CSS -->
   <style>
     body {
-    background-color: #8EC5FC;
-    background-image: linear-gradient(62deg, #8EC5FC 0%, #E0C3FC 100%);
-    background-size: cover;
-   
+      background-color: #8EC5FC;
+      background-image: linear-gradient(62deg, #8EC5FC 0%, #E0C3FC 100%);
+      background-size: cover;
+    }
 
-  
-    
-   
-}
     .navbar {
       background-color: #007bff !important; /* Blue color */
     }
@@ -101,12 +97,15 @@
     .custom-file-upload {
       cursor: pointer;
     }
+    .navbar-collapse {
+      transition: height 0.4s ease-out;
+    }
     
   </style>
 </head>
 <body>
  <!-- Navbar -->
-<nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+ <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
   <a class="navbar-brand" href="/index.html">AIML classroom</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
       aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -119,15 +118,14 @@
           </li>
           <!-- Add logout link here -->
           <li class="nav-item">
-              <a class="nav-link" href="/labs/logout.html">Logout</a>
+              <a class="nav-link" href="\aiml\logout.html">Logout</a>
           </li>
       </ul>
   </div>
 </nav>
 
-
   <!-- Main Content -->
-  <div class="container-fluid">
+  <div class="container-fluid" id="main-content">
     <!-- Notes section -->
     <section id="notes" class="subject-section">
       <h3>Notes &IMP questions</h3>
@@ -158,30 +156,24 @@
   <script type="module" src="/script/fbdb.js"></script>
   <script src='https://cdn.firebase.com/js/client/2.2.1/firebase.js'></script>
   <script src="https://www.gstatic.com/firebasejs/9.6.2/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.6.2/firebase-auth-compat.js"></script>
-    <script>
-        // Initialize Firebase
-        const firebaseConfig = {
-          apiKey: "AIzaSyCN0VLc3wYAeKBk06g-HVtE4dDPcEZo6xk",
-        authDomain: "aiml-smvitm.firebaseapp.com",
-        projectId: "aiml-smvitm",
-        storageBucket: "aiml-smvitm.appspot.com",
-        messagingSenderId: "867145474581",
-        appId: "1:867145474581:web:a2e294081b458bdb69e41c",
-        measurementId: "G-64CF103MLC"
-        };
-        firebase.initializeApp(firebaseConfig);
+  <script src="https://www.gstatic.com/firebasejs/9.6.2/firebase-auth-compat.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", async () => {
+      // Fetch Firebase configuration from server
+      const response = await fetch('/auth-config');
+      const firebaseConfig = await response.json();
 
-        // Check authentication state
-        firebase.auth().onAuthStateChanged(function(user) {
-            if (!user) {
-                // User is not authenticated, redirect to login page
-                window.location.href = "/labs/login.html";
-            }
-        });
-    </script>
-    <script>
-    document.addEventListener("DOMContentLoaded", () => {
+      // Initialize Firebase
+      firebase.initializeApp(firebaseConfig);
+
+      // Check authentication state
+      firebase.auth().onAuthStateChanged(function(user) {
+        if (!user) {
+          // User is not authenticated, redirect to login page
+          window.location.href = "\aiml\login.html";
+        }
+      });
+
       // JavaScript
       document.querySelectorAll('.subject-folder').forEach(folder => {
         folder.addEventListener('click', () => {
@@ -189,6 +181,28 @@
           folder.classList.toggle('active');
           subfolder.classList.toggle('active');
         });
+      });
+
+      // Hide navbar collapse when scrolling on small devices
+      window.addEventListener('scroll', () => {
+        const navbarCollapse = document.querySelector('.navbar-collapse');
+        const navbarToggler = document.querySelector('.navbar-toggler');
+        if (window.innerWidth < 992 && navbarCollapse.classList.contains('show')) {
+          // Get the current height of the navbar
+          const startHeight = navbarCollapse.getBoundingClientRect().height;
+          // Set the height to the current height, this is necessary to animate from this value
+          navbarCollapse.style.height = `${startHeight}px`;
+          // Force a reflow, this is necessary to make the next changes animate
+          window.getComputedStyle(navbarCollapse).getPropertyValue('height');
+          // Set the height to 0 to animate the closing of the navbar
+          navbarCollapse.style.height = '0px';
+          // After the transition ends, remove the custom height and the show class
+          navbarCollapse.addEventListener('transitionend', () => {
+            navbarCollapse.style.removeProperty('height');
+            navbarCollapse.classList.remove('show');
+          }, { once: true });
+          navbarToggler.classList.add('collapsed');
+        }
       });
     });
   </script>
