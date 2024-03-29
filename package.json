@@ -3,6 +3,9 @@
     "start": "node server.js",
     "build": "npm install"
   },
+  "devDependencies": {
+    "dotenv-webpack": "^8.0.1"
+  },
   "dependencies": {
     "chokidar": "^3.6.0",
     "dotenv": "^16.4.5",

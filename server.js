@@ -21,7 +21,7 @@ app.get('/auth-config', (req, res) => {
 });
 
 // Serve your static files
-app.use(express.static(path.join(__dirname, '/')));
+app.use(express.static(path.join(__dirname, 'public')));
 
 // Start the server
 const PORT = process.env.PORT || 3000;
