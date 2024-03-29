@@ -1,5 +1,5 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.2.0/firebase-app.js";
-import { getFirestore} from "https://www.gstatic.com/firebasejs/9.2.0/firebase-firestore.js";
+import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/9.2.0/firebase-firestore.js";
 
 document.addEventListener('DOMContentLoaded', async () => {
   // Fetch Firebase configuration from server
@@ -9,22 +9,20 @@ document.addEventListener('DOMContentLoaded', async () => {
   // Initialize Firebase app
   const app = initializeApp(firebaseConfig);
   const db = getFirestore(app);
+  
 
   // Assuming you have a collection called "csharpPrograms" in Firestore
-  const csharpProgramsRef = db.collection("csharpPrograms");
+  const csharpProgramsRef = collection(db, "csharpPrograms");
 
   // Function to fetch and display C# programs
-  function displayCSharpPrograms() {
-    csharpProgramsRef.get().then((querySnapshot) => {
-      querySnapshot.forEach((doc) => {
-        const programData = doc.data();
-        const codeBlock = document.createElement("pre");
-        codeBlock.className = "code-block";
-        codeBlock.textContent = programData.code;
-        document.getElementById("csharp-programs").appendChild(codeBlock);
-      });
-    }).catch((error) => {
-      console.log("Error getting documents: ", error);
+  async function displayCSharpPrograms() {
+    const querySnapshot = await getDocs(csharpProgramsRef);
+    querySnapshot.forEach((doc) => {
+      const programData = doc.data();
+      const codeBlock = document.createElement("pre");
+      codeBlock.className = "code-block";
+      codeBlock.textContent = programData.code;
+      document.getElementById("csharp-programs").appendChild(codeBlock);
     });
   }
 
