@@ -11,31 +11,205 @@
     <!-- Font Awesome CSS for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
     <link rel="stylesheet" href="/style/index.css">
+    <style>
+        /* Additional styles here */
+        body {
+            overflow-x: hidden; /* Prevent horizontal scrolling */
+        }
+        .navbar {
+            background-color: blueviolet;
+            text-align: center;
+            transition: background-color 0.5s ease-in-out;
+        }
+        .navbar.navbar-scrolled {
+            background-color: #000;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .btn {
+            transition: transform 0.3s ease-in-out;
+        }
+        .btn:hover {
+            transform: scale(1.05);
+            width: ;
+        }
+        .card {
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: box-shadow 0.3s ease-in-out;
+            margin-bottom: 20px;
+        }
+        .card:hover {
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+            transform: translateY(-5px);
+        }
+        .footer {
+            background-color: #343a40;
+            color: #ffffff;
+            text-align: center;
+            padding: 2px 0;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            opacity: 0.9;
+            border-top: 1px solid #007bff;
+            opacity: 0;
+            animation: fadeInUp 1s forwards 1s;
+        }
+        .footer-icons {
+            font-size: 24px;
+            margin: 0 10px;
+            color: #007bff;
+            transition: color 0.3s ease-in-out;
+        }
+        .footer-icons:hover {
+            color: #ffffff;
+        }
+        .cookie-banner {
+            position: fixed;
+            bottom: -100px;
+            left: 0;
+            width: 100%;
+            background-color: #343a40;
+            color: #ffffff;
+            padding: 10px;
+            text-align: center;
+            opacity: 0;
+            animation: slideInUp 1s forwards 2s;
+        }
+        .cookie-accept {
+            background-color: #007bff;
+            color: #ffffff;
+            border: none;
+            padding: 5px 10px;
+            font-size: 14px;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+        .cookie-accept:hover {
+            background-color: #0056b3;
+        }
+        /* Add this CSS to your existing stylesheet */
+.aiml-classroom-card {
+    background-color: #f8f9fa; /* Adjust as needed */
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.3s ease-in-out;
+}
 
+.aiml-classroom-card:hover {
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
 
+.card-content {
+    text-align: center;
+}
+
+.card-content i {
+    color: #007bff; /* Adjust icon color */
+    margin-bottom: 20px;
+}
+
+.card-content h5 {
+    margin-bottom: 10px;
+}
+
+.card-content p {
+    color: #6c757d; /* Adjust text color */
+    margin-bottom: 20px;
+}
+
+.card-content .btn {
+    font-size: 16px;
+    padding: 10px 20px;
+}
+/* Style for the Labs heading */
+.labs-heading {
+            text-align: center;
+            font-weight: bold;
+            flex-wrap: wrap;
+            font-size: 50px;
+            border-bottom: 2px solid rgb(130, 2, 250);
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(100px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        @keyframes slideInUp {
+            from {
+                bottom: -100px;
+            }
+            to {
+                bottom: 0;
+            }
+        }
+    </style>
 </head>
 <body>
 
-<nav class="navbar navbar-expand-lg navbar-dark fixed-top">
-    <a class="navbar-brand" href="/">AI-ML</a>
-</nav>
-
-
-
-<div class="container">
-    <h5>For everyone & everything </h5>
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <a class="navbar-brand" href="/">AI-ML</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
     
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <!-- Add About page link -->
+                <li class="nav-item">
+                    <a class="nav-link" href="/about.html">About</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+<div class="container mt-5">
 
     <div class="main">
-        <a href="/labs/login.html" class="btn  btn-green"> AIML-CLASSROOM</a>
+        <div class="aiml-classroom-card">
+            <div class="card-content">
+                <i class="fas fa-chalkboard-teacher fa-3x"></i>
+                <h5>Welcome to AIML Classroom</h5>
+                <p> AI and Machine Learning resources tailored for everyone.</p>
+                <a href="/labs/login.html" class="btn btn-green">Enter Classroom</a>
+            </div>
+        </div>
+        
     </div>
-
-    <a href="/labs/csharp.html" class="btn btn-csharp">  C# Lab</a>
-    <a href="/labs/dbms.html" class="btn btn-dbms">  DBMS Lab</a>
-    <a href="/labs/cn.html" class="btn btn-cn">  CN Lab</a>
+    
+    <h3 class="labs-heading">Labs</h3>
+<div class="row mt-3">
+    <div class="col-md-4 mb-3">
+        <div class="text-center">
+            <!-- <h5>C# Programming</h5> -->
+            <a href="/labs/csharp.html" class="btn btn-primary btn-block">C#</a>
+        </div>
+    </div>
+    <div class="col-md-4 mb-3">
+        <div class="text-center">
+            <!-- <h5>Database Management System</h5> -->
+            <a href="/labs/dbms.html" class="btn btn-primary btn-block">DBMS</a>
+        </div>
+    </div>
+    <div class="col-md-4 mb-3">
+        <div class="text-center">
+            <!-- <h5>Computer Network</h5> -->
+            <a href="/labs/cn.html" class="btn btn-primary btn-block">CN</a>
+        </div>
+    </div>
 </div>
 
-
+</div>
 
 <div class="footer">
     <a href="" target="_blank" rel="noopener noreferrer">
@@ -69,10 +243,8 @@
     }
 </script>
 <!--Start of Tawk.to Script-->
-<script type="text/javascript" src="/script/tawk.js">
-  
-    </script>
-    <!--End of Tawk.to Script-->
+<script type="text/javascript" src="/script/tawk.js"></script>
+<!--End of Tawk.to Script-->
 
 </body>
 </html>
