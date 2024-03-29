@@ -1,5 +1,5 @@
-import { initializeApp } from "https://www.gstatic.com/firebasejs/9.2.0/firebase-app.js";
-import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/9.2.0/firebase-firestore.js";
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-app.js";
+import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-firestore.js";
 
 document.addEventListener('DOMContentLoaded', async () => {
   // Fetch Firebase configuration from server
@@ -9,7 +9,6 @@ document.addEventListener('DOMContentLoaded', async () => {
   // Initialize Firebase app
   const app = initializeApp(firebaseConfig);
   const db = getFirestore(app);
-  
 
   // Assuming you have a collection called "csharpPrograms" in Firestore
   const csharpProgramsRef = collection(db, "csharpPrograms");
@@ -19,10 +18,14 @@ document.addEventListener('DOMContentLoaded', async () => {
     const querySnapshot = await getDocs(csharpProgramsRef);
     querySnapshot.forEach((doc) => {
       const programData = doc.data();
-      const codeBlock = document.createElement("pre");
-      codeBlock.className = "code-block";
-      codeBlock.textContent = programData.code;
-      document.getElementById("csharp-programs").appendChild(codeBlock);
+      // Iterate over each array of C# code snippets
+      programData.cs.forEach((codeSnippet) => {
+        console.log(codeSnippet);
+        const codeBlock = document.createElement("pre");
+        codeBlock.className = "code-block";
+        codeBlock.textContent = codeSnippet;
+        document.getElementById("csharp-programs").appendChild(codeBlock);
+      });
     });
   }
 
