@@ -1,40 +1,50 @@
-// Import the functions you need from the SDKs you need
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
 import { getStorage, ref, listAll, getDownloadURL } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-storage.js";
 
-// Your web app's Firebase configuration
-const firebaseConfig = {
-  apiKey: "AIzaSyCN0VLc3wYAeKBk06g-HVtE4dDPcEZo6xk",
-  authDomain: "aiml-smvitm.firebaseapp.com",
-  projectId: "aiml-smvitm",
-  storageBucket: "aiml-smvitm.appspot.com",
-  messagingSenderId: "867145474581",
-  appId: "1:867145474581:web:a2e294081b458bdb69e41c",
-  measurementId: "G-64CF103MLC"
-};
+// Function to fetch Firebase configuration from the server
+async function fetchFirebaseConfig() {
+  try {
+    const response = await fetch('/auth-config');
+    if (!response.ok) {
+      throw new Error('Failed to fetch Firebase configuration');
+    }
+    return await response.json();
+  } catch (error) {
+    console.error('Error fetching Firebase configuration:', error);
+    return null;
+  }
+}
 
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
-const storage = getStorage(app);
+// Function to initialize Firebase with fetched configuration
+async function initializeFirebase() {
+  const firebaseConfig = await fetchFirebaseConfig();
+  if (!firebaseConfig) {
+    console.error('Firebase configuration not available.');
+    return null;
+  }
+
+  // Initialize Firebase
+  const app = initializeApp(firebaseConfig);
+  const storage = getStorage();
+
+  return { app, storage };
+}
+
+
+// Call the function to initialize Firebase and render subject folders
+initializeFirebase().then(({ app, storage }) => {
+  renderFolders('folder-notes', 'notes', storage);
+  renderFolders('folder-textbooks', 'textbooks', storage);
+  renderFolders('folder-tie', 'tie_imp', storage);
+  renderFolders('folder-oldpapers', 'oldpapers', storage);
+}).catch(error => {
+  console.error('Failed to initialize Firebase:', error);
+});
 
 let currentOpenFolder = null;
 
-// Function to render uploaded files for each subject
-async function renderUploadedFiles(subject, folder) {
-  const containerDiv = document.getElementById(`${folder}-${subject}`);
-  if (!containerDiv) return; // Exit if container not found
-  const storageRef = ref(storage, `${folder}/${subject}`);
-  const items = await listAll(storageRef);
-  const fileLinks = await Promise.all(items.items.map(async (itemRef) => {
-    const url = await getDownloadURL(itemRef);
-    const fileName = itemRef.name;
-    return `<li><a href="${url}" target="_blank">${fileName}</a></li>`;
-  }));
-  containerDiv.innerHTML = '<ul>' + fileLinks.join('') + '</ul>';
-}
-
 // Function to render subject folders
-async function renderFolders(containerId, folderName) {
+async function renderFolders(containerId, folderName, storage) {
   const foldersDiv = document.getElementById(containerId);
   if (!foldersDiv) {
     console.error('Folders container not found.');
@@ -43,7 +53,7 @@ async function renderFolders(containerId, folderName) {
   try {
     const folderRef = ref(storage, folderName);
     const folderList = await listAll(folderRef);
-    folderList.prefixes.forEach((subjectRef) => {
+    folderList.prefixes.forEach(async (subjectRef) => {
       const subjectName = subjectRef.name.split('/').pop(); // Extract subject name from folder path
       const subjectDiv = document.createElement('div');
       const filesDiv = document.createElement('div');
@@ -87,9 +97,3 @@ async function renderFolders(containerId, folderName) {
     console.error('Failed to render subject folders:', error);
   }
 }
-
-// Call the function to render subject folders for notes, textbooks, and tie_imp
-renderFolders('folder-notes', 'notes');
-renderFolders('folder-textbooks', 'textbooks');
-renderFolders('folder-tie', 'tie_imp');
-renderFolders('folder-oldpapers', 'oldpapers');

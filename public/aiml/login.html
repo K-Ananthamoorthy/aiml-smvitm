@@ -78,13 +78,7 @@ body {
     <!-- Login container -->
     <div class="container mt-5" id="login-container" style="display: none;">
         <div class="row justify-content-center">
-            
-                    
-                    
-                    
-            <button type="button" class="login-with-google-btn" onclick="googleSignIn()">Sign in with Google</button>                    
-                        
-        
+        <button type="button" class="login-with-google-btn" onclick="googleSignIn()">Sign in with Google</button>                    
     </div>
     
 
@@ -106,29 +100,26 @@ body {
     
     <!-- Your Firebase configuration -->
     <script>
-        // Initialize Firebase
-        const firebaseConfig = {
-        apiKey: "AIzaSyCN0VLc3wYAeKBk06g-HVtE4dDPcEZo6xk",
-        authDomain: "aiml-smvitm.firebaseapp.com",
-        projectId: "aiml-smvitm",
-        storageBucket: "aiml-smvitm.appspot.com",
-        messagingSenderId: "867145474581",
-        appId: "1:867145474581:web:a2e294081b458bdb69e41c",
-        measurementId: "G-64CF103MLC"
-        };
-        firebase.initializeApp(firebaseConfig);
+        document.addEventListener("DOMContentLoaded", async () => {
+            // Fetch Firebase configuration from server
+            const response = await fetch('/auth-config');
+            const firebaseConfig = await response.json();
 
-        // Check if user is already logged in
-        firebase.auth().onAuthStateChanged(function(user) {
-            if (user) {
-                // Show loading spinner
-                document.getElementById('loading-spinner').style.display = 'block';
-                // Redirect to aiml.html upon successful login
-                window.location.href = "aiml.html";
-            } else {
-                // Show login container
-                document.getElementById('login-container').style.display = 'block';
-            }
+            // Initialize Firebase
+            firebase.initializeApp(firebaseConfig);
+
+            // Check if user is already logged in
+            firebase.auth().onAuthStateChanged(function (user) {
+                if (user) {
+                    // Show loading spinner
+                    document.getElementById('loading-spinner').style.display = 'block';
+                    // Redirect to aiml.html upon successful login
+                    window.location.href = "aiml.html";
+                } else {
+                    // Show login container
+                    document.getElementById('login-container').style.display = 'block';
+                }
+            });
         });
 
         function googleSignIn() {

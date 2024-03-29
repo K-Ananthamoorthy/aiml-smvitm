@@ -39,34 +39,52 @@
         .logout-btn {
             width: 100%;
         }
+
+        .btn-primary {
+            background-color: transparent;
+            border: none;
+            color: #007bff; /* Change button color to blue */
+            font-size: 20px;
+        }
+
+        .btn-primary:hover {
+            color: #000000; /* Change button color on hover */
+            text-decoration: none;
+        }
     </style>
 </head>
 
 <body>
     <div class="container">
         <div class="logout-card">
+            <button class="btn btn-primary" onclick="goBack()">&#8592; </button> <!-- Back button -->
             <h2 class="text-center">Are you sure you want to log out?</h2>
             <button class="btn btn-danger logout-btn" onclick="logout()">Logout</button>
         </div>
     </div>
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 
+    <!-- Bootstrap JS -->
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+
+    <!-- Firebase JavaScript SDK -->
     <script src="https://www.gstatic.com/firebasejs/9.6.2/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.6.2/firebase-auth-compat.js"></script>
     <script>
-        // Initialize Firebase
-        const firebaseConfig = {
-            apiKey: "AIzaSyCN0VLc3wYAeKBk06g-HVtE4dDPcEZo6xk",
-            authDomain: "aiml-smvitm.firebaseapp.com",
-            projectId: "aiml-smvitm",
-            storageBucket: "aiml-smvitm.appspot.com",
-            messagingSenderId: "867145474581",
-            appId: "1:867145474581:web:a2e294081b458bdb69e41c",
-            measurementId: "G-64CF103MLC"
-        };
-        firebase.initializeApp(firebaseConfig);
+        function goBack() {
+            window.history.back();
+        }
+
+        document.addEventListener("DOMContentLoaded", async () => {
+            // Fetch Firebase configuration from server
+            const response = await fetch('/auth-config');
+            const firebaseConfig = await response.json();
+
+            // Initialize Firebase
+            firebase.initializeApp(firebaseConfig);
+        });
 
         function logout() {
             firebase.auth().signOut().then(() => {
