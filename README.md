@@ -36,7 +36,7 @@ To get started with AIML Classroom, follow these steps:
 
 1. Clone the repository:
     ```sh
-    git clone https://github.com/your-username/aiml-classroom.git
+   [ git clone https://github.com/your-username/aiml-classroom.git](https://github.com/K-Ananthamoorthy/aiml-smvitm.git)
     ```
 
 2. Navigate to the project directory:
