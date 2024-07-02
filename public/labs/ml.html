@@ -85,7 +85,7 @@
     <h2 class="text-center mt-4">ML Lab Programs</h2>
 
     <!-- Program 1 -->
-    <div class="row">
+    <div class="row" id="program-1">
         <div class="col-md-12">
             <div class="card program-card">
                 <i class="fas fa-copy copy-icon" onclick="copyToClipboard('program1')"></i>
@@ -119,7 +119,6 @@ for i in range(len(instance)):
 
 print("\nThe Maximally Specific Hypothesis for a given Training Examples :\n")
 print(hypothesis)
-
                     </code></pre>
                 </div>
             </div>
@@ -127,7 +126,7 @@ print(hypothesis)
     </div>
 
     <!-- Program 2 -->
-    <div class="row">
+    <div class="row" id="program-2">
         <div class="col-md-12">
             <div class="card program-card">
                 <i class="fas fa-copy copy-icon" onclick="copyToClipboard('program2')"></i>
@@ -179,7 +178,6 @@ def learn(concepts, target):
 s_final, g_final = learn(concepts, target)
 print("\nFinal Specific_h:", s_final)
 print("Final General_h:", g_final)
-
                     </code></pre>
                 </div>
             </div>
@@ -187,7 +185,7 @@ print("Final General_h:", g_final)
     </div>
 
     <!-- Program 3 -->
-    <div class="row">
+    <div class="row" id="program-3">
         <div class="col-md-12">
             <div class="card program-card">
                 <i class="fas fa-copy copy-icon" onclick="copyToClipboard('program3')"></i>
@@ -224,8 +222,7 @@ for r in range(len(x_test)):
                         
 print("\nConfusion Matrix:\n", metrics.confusion_matrix(y_test, y_pred))
 print("Classification Accuracy:", metrics.accuracy_score(y_test, y_pred))
-                        
-        </code></pre>
+                    </code></pre>
                 </div>
             </div>
         </div>
@@ -269,7 +266,21 @@ print("Classification Accuracy:", metrics.accuracy_score(y_test, y_pred))
             toast.style.display = 'none';
         }, 2000);
     }
+
+    function copyProgramFromUrl() {
+        var url = window.location.href;
+        var programNumber = url.match(/ml(\d+)$/);
+        if (programNumber) {
+            var programId = 'program' + programNumber[1];
+            copyToClipboard(programId);
+        }
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+        copyProgramFromUrl();
+    });
 </script>
+
 
 </body>
 </html>
