@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="google-adsense-account" content="ca-pub-3267548468157685">
+    <title>ML Lab Programs</title>
+    <link rel="icon" href="/media/logo_aiml.png" type="image/x-icon">
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome CSS for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+    <!-- Highlight.js CSS for syntax highlighting -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/styles/default.min.css">
+    <style>
+        body {
+            background-color: #343a40;
+            color: #ffffff;
+            padding-top: 56px; /* Adjusted for the fixed navbar */
+        }
+        .program-section {
+            margin-top: 20px;
+        }
+        .program-card {
+            border: 1px solid #dee2e6;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            background-color: #ffffff;
+            color: #343a40;
+            position: relative;
+        }
+        .copy-icon {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 20px;
+            color: #007bff;
+            cursor: pointer;
+        }
+        .navbar {
+            background-color: #007bff;
+            color: white;
+        }
+        .footer {
+            background-color: #343a40;
+            color: #ffffff;
+            text-align: center;
+            padding: 5px;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            opacity: 0.9;
+            border-top: 1px solid #007bff;
+        }
+        .footer-icons {
+            font-size: 24px;
+            margin: 0 10px;
+            color: #007bff;
+            transition: color 0.3s ease-in-out;
+        }
+        .footer-icons:hover {
+            color: #ffffff;
+        }
+        .dark-toast {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: #343a40;
+            color: #ffffff;
+            padding: 15px;
+            border-radius: 10px;
+            z-index: 1000;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+    <a class="navbar-brand" href="/">ML Lab</a>
+</nav>
+
+<div class="container-fluid">
+    <h2 class="text-center mt-4">ML Lab Programs</h2>
+
+    <!-- Program 1 -->
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card program-card">
+                <i class="fas fa-copy copy-icon" onclick="copyToClipboard('program1')"></i>
+                <div class="card-body">
+                    <h5 class="card-title"> 
+                        1. Find-S algorithm
+                    </h5>
+                    <pre><code class="python" id="program1">
+import pandas as pd
+import numpy as np
+
+data = pd.read_csv("data.csv")
+instance = np.array(data)
+num_attributes = 6
+print("The initial value of hypothesis:", hypothesis := ['0'] * num_attributes)
+print(hypothesis)
+
+for j in range(0, num_attributes):
+    hypothesis[j] = instance[0][j]
+
+print("Find S: Finding a Maximally Specific Hypothesis\n")
+
+for i in range(len(instance)):
+    if instance[i][num_attributes - 1] == "yes":
+        for j in range(num_attributes):
+            if instance[i][j] != hypothesis[j]:
+                hypothesis[j] = "?"
+            else:
+                hypothesis[j] = instance[i][j]
+    print(f"For Training instance No. {i+1}, the hypothesis is:", hypothesis)
+
+print("\nThe Maximally Specific Hypothesis for a given Training Examples :\n")
+print(hypothesis)
+
+                    </code></pre>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Program 2 -->
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card program-card">
+                <i class="fas fa-copy copy-icon" onclick="copyToClipboard('program2')"></i>
+                <div class="card-body">
+                    <h5 class="card-title">2. Candidate-Elimination algorithm</h5>
+                    <pre><code class="python" id="program2">
+import numpy as np
+import pandas as pd
+
+data = pd.read_csv('data.csv')
+concepts = np.array(data)[:, 0:-1]
+print("Instances are:\n", concepts)
+
+target = np.array(data)[:, -1]
+print("Target Values are:", target)
+
+def learn(concepts, target):
+    specific_h = concepts[0].copy()
+    print("Initialization of specific_h and general_h:")
+    print(specific_h)
+    
+    general_h = [['?' for _ in range(len(specific_h))] for _ in range(len(specific_h))]
+    print(general_h)
+    
+    for i, h in enumerate(concepts):
+        if target[i] == 'yes':
+            for x in range(len(specific_h)):
+                if h[x] != specific_h[x]:
+                    specific_h[x] = '?'
+                    general_h[x][x] = '?'
+        
+        if target[i] == 'no':
+            for x in range(len(specific_h)):
+                if h[x] != specific_h[x]:
+                    general_h[x][x] = specific_h[x]
+                else:
+                    general_h[x][x] = '?'
+        
+        print(f"Step {i+1} of Candidate Elimination Algorithm:")
+        print(specific_h)
+        print(general_h)
+        
+        indices = [i for i, val in enumerate(general_h) if val == ['?', '?', '?', '?', '?', '?']]
+        for i in indices:
+            general_h.remove(['?', '?', '?', '?', '?', '?'])
+    
+    return specific_h, general_h
+
+s_final, g_final = learn(concepts, target)
+print("\nFinal Specific_h:", s_final)
+print("Final General_h:", g_final)
+
+                    </code></pre>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Program 3 -->
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card program-card">
+                <i class="fas fa-copy copy-icon" onclick="copyToClipboard('program3')"></i>
+                <div class="card-body">
+                    <h5 class="card-title">3. k-Nearest Neighbor algorithm</h5>
+                    <pre><code class="python" id="program3">
+from sklearn.neighbors import KNeighborsClassifier
+from sklearn import datasets
+from sklearn.model_selection import train_test_split
+from sklearn import metrics
+            
+iris = datasets.load_iris()
+print("Iris Data set loaded...")
+                        
+x_train, x_test, y_train, y_test = train_test_split(iris.data, iris.target, random_state=60, test_size=0.1)
+print("Dataset is split into training and testing samples...")
+print("Size of training data and its label:", x_train.shape, y_train.shape)
+print("Size of testing data and its label:", x_test.shape, y_test.shape)
+                        
+for i in range(len(iris.target_names)):
+    print("Label", i, "-", str(iris.target_names[i]))
+                        
+classifier = KNeighborsClassifier(n_neighbors=1)
+classifier.fit(x_train, y_train)
+                        
+y_pred = classifier.predict(x_test)
+                        
+print("Results of Classification using K-nn with K=1")
+print("\n----------------------------------------------")
+print('{:<15} {:<15} {:<15}'.format('Original Label', 'Predicted Label', 'Correct/Wrong'))
+print("----------------------------------------------")
+for r in range(len(x_test)):
+    print('{:<15} {:<15} {:<15}'.format(y_test[r], y_pred[r], 'Correct' if y_test[r] == y_pred[r] else 'Wrong'))
+                        
+print("\nConfusion Matrix:\n", metrics.confusion_matrix(y_test, y_pred))
+print("Classification Accuracy:", metrics.accuracy_score(y_test, y_pred))
+                        
+        </code></pre>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<div class="footer">
+    <a href="#" target="_blank" rel="noopener noreferrer">
+        <span class="footer-icons"><i class="fab fa-github"></i></span>
+    </a>
+</div>
+
+<div id="dark-toast" class="dark-toast">
+    <div class="toast-body">Copied to clipboard!</div>
+</div>
+
+<!-- Bootstrap JS and Popper.js -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.0.7/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<!-- Highlight.js for syntax highlighting -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+<script>
+    function copyToClipboard(elementId) {
+        var copyText = document.getElementById(elementId);
+        var textArea = document.createElement("textarea");
+        textArea.value = copyText.innerText;
+        document.body.appendChild(textArea);
+        textArea.select();
+        document.execCommand('copy');
+        document.body.removeChild(textArea);
+
+        var toast = document.getElementById('dark-toast');
+        toast.style.display = 'block';
+        toast.innerText = 'Copied to clipboard!';
+
+        setTimeout(function () {
+            toast.style.display = 'none';
+        }, 2000);
+    }
+</script>
+
+</body>
+</html>
