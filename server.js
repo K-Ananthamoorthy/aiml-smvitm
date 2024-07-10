@@ -5,6 +5,8 @@ const path = require('path');
 // Load environment variables from a .env file
 require('dotenv').config();
 
+app.use(express.static(path.join(__dirname, 'public')));
+
 const firebaseConfig = {
   apiKey: process.env.FIREBASE_API_KEY,
   authDomain: process.env.FIREBASE_AUTH_DOMAIN,
@@ -19,6 +21,18 @@ const firebaseConfig = {
 app.get('/auth-config', (req, res) => {
   res.json(firebaseConfig);
 });
+
+app.get('/1', (req ,res) => {
+  res.sendFile(path.join(__dirname, 'public/ml-lab/1.html'));
+})
+
+app.get('/2', (req ,res) => {
+  res.sendFile(path.join(__dirname, 'public/ml-lab/2.html'));
+})
+
+app.get('/3', (req ,res) => {
+  res.sendFile(path.join(__dirname, 'public/ml-lab/3.html'));
+})
 
 // Serve your static files
 app.use(express.static(path.join(__dirname, 'public')));
