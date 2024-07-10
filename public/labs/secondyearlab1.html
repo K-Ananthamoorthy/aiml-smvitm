@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="google-adsense-account" content="ca-pub-3267548468157685">
+    <title>ML Lab Programs</title>
+    <link rel="icon" href="/media/logo_aiml.png" type="image/x-icon">
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome CSS for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+    <!-- Highlight.js CSS for syntax highlighting -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/styles/default.min.css">
+    <style>
+        body {
+            background-color: #343a40;
+            color: #ffffff;
+            padding-top: 56px; /* Adjusted for the fixed navbar */
+        }
+        .program-section {
+            margin-top: 20px;
+        }
+        .program-card {
+            border: 1px solid #dee2e6;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            background-color: #ffffff;
+            color: #343a40;
+            position: relative;
+        }
+        .copy-icon {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 20px;
+            color: #007bff;
+            cursor: pointer;
+        }
+        .navbar {
+            background-color: #007bff;
+            color: white;
+        }
+        .footer {
+            background-color: #343a40;
+            color: #ffffff;
+            text-align: center;
+            padding: 5px;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            opacity: 0.9;
+            border-top: 1px solid #007bff;
+        }
+        .footer-icons {
+            font-size: 24px;
+            margin: 0 10px;
+            color: #007bff;
+            transition: color 0.3s ease-in-out;
+        }
+        .footer-icons:hover {
+            color: #ffffff;
+        }
+        .dark-toast {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: #343a40;
+            color: #ffffff;
+            padding: 15px;
+            border-radius: 10px;
+            z-index: 1000;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+    <a class="navbar-brand" href="/">Second year Lab</a>
+</nav>
+
+<div class="container-fluid">
+    <h2 class="text-center mt-4">Second year Lab Programs</h2>
+
+    <!-- Program 1 -->
+    <div class="row" id="program-1">
+        <div class="col-md-12">
+            <div class="card program-card">
+                <i class="fas fa-copy copy-icon" onclick="copyToClipboard('program1')"></i>
+                <div class="card-body">
+                    <h5 class="card-title"> 1: Implement and Demonstrate Depth First Search Algorithm on Water Jug Problem</h5>
+                    <pre><code class="python" id="program1">
+from collections import deque 
+# Define the jug capacities 
+jug1_capacity = 4 
+jug2_capacity = 3 
+target_volume = 2 
+# Initial state with both jugs empty 
+initial_state = (0, 0) 
+# Function to check if a state is valid 
+def is_valid_state(state): 
+jug1, jug2 = state 
+return 0 <= jug1 <= jug1_capacity and 0 <= jug2 <= jug2_capacity 
+# Function to perform pour actions 
+def pour(from_jug, to_jug, state): 
+jug1, jug2 = state 
+if from_jug == 1: 
+if jug1 > 0 and jug2 < jug2_capacity: 
+amount_poured = min(jug1, jug2_capacity - jug2) 
+new_jug1 = jug1 - amount_poured 
+new_jug2 = jug2 + amount_poured 
+return (new_jug1, new_jug2) 
+else: 
+if jug2 > 0 and jug1 < jug1_capacity: 
+amount_poured = min(jug2, jug1_capacity - jug1) 
+new_jug1 = jug1 + amount_poured 
+new_jug2 = jug2 - amount_poured 
+return (new_jug1, new_jug2) 
+return None 
+# Function to solve the water jug problem using depth-first search 
+def water_jug_dfs(): 
+visited = set() 
+stack = deque() 
+stack.append((initial_state, []))  # State and actions taken 
+while stack: 
+current_state, actions = stack.pop() 
+if current_state[0] == target_volume or current_state[1] == target_volume: 
+return actions 
+visited.add(current_state) 
+for action in ["Fill Jug 1", "Fill Jug 2", "Empty Jug 1", "Empty Jug 2", 
+"Pour Jug 1 to Jug 2", "Pour Jug 2 to Jug 1"]: 
+            new_state = None 
+            if action == "Fill Jug 1": 
+                new_state = (jug1_capacity, current_state[1]) 
+            elif action == "Fill Jug 2": 
+                new_state = (current_state[0], jug2_capacity) 
+            elif action == "Empty Jug 1": 
+                new_state = (0, current_state[1]) 
+            elif action == "Empty Jug 2": 
+                new_state = (current_state[0], 0) 
+            elif action == "Pour Jug 1 to Jug 2": 
+                new_state = pour(1, 2, current_state) 
+            elif action == "Pour Jug 2 to Jug 1": 
+                new_state = pour(2, 1, current_state) 
+            if new_state is not None and new_state not in visited: 
+                new_actions = actions + [action] 
+                stack.append((new_state, new_actions)) 
+    return None 
+# Solve the water jug problem 
+solution = water_jug_dfs() 
+if solution: 
+    print("Solution Found:") 
+    for i, action in enumerate(solution, start=1): 
+        print(f"Step {i}: {action}") 
+else: 
+    print("No solution found.") 
+                    
+                    </code></pre>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Program 2 -->
+    <div class="row" id="program-2">
+        <div class="col-md-12">
+            <div class="card program-card">
+                <i class="fas fa-copy copy-icon" onclick="copyToClipboard('program2')"></i>
+                <div class="card-body">
+                    <h5 class="card-title"> 2: Implement and Demonstrate Best First Search 
+                        Algorithm on Missionaries-Cannibals Problems using Python</h5>
+                    <pre><code class="python" id="program2">
+#Python program to illustrate Missionaries & cannibals Problem   
+print("\n")  
+print("\tGame Start\nNow the task is to move all of them to right side of the 
+river")  
+print("rules:\n1. The boat can carry at most two people\n2. If cannibals num 
+greater than missionaries then the cannibals would eat the missionaries\n3. 
+The boat cannot cross the river by itself with no people on board")  
+lM = 3             
+#lM = Left side Missionaries number   
+lC = 3              
+rM=0               
+rC=0              
+userM = 0        
+side travel  
+userC = 0          
+travel    
+k = 0 
+#lC = Laft side Cannibals number   
+#rM = Right side Missionaries number   
+#rC = Right side cannibals’ number   
+#userM = User input for number of missionaries for right to left 
+#userC = User input for number of cannibals for right to left 
+print("\nM M M C C C |     --- | \n")  
+try:  
+while(True):  
+while(True):  
+print("Left side -> right side river travel")  
+#uM = user input for number of missionaries for left to right travel   
+#uC = user input for number of cannibals for left to right travel   
+uM = int(input("Enter number of Missionaries travel => "))      
+uC = int(input("Enter number of Cannibals travel => "))  
+if((uM==0)and(uC==0)):  
+print("Empty travel not possible")  
+print("Re-enter : ")  
+elif(((uM+uC) <= 2)and((lM-uM)>=0)and((lC-uC)>=0)):  
+break 
+else:  
+print("Wrong input re-enter : ")  
+lM = (lM-uM)  
+lC = (lC-uC)  
+rM += uM  
+rC += uC  
+print("\n")  
+for i in range(0,lM):  
+print("M ",end="")  
+for i in range(0,lC):  
+print("C ",end="")  
+print("| --> | ",end="")  
+for i in range(0,rM):  
+print("M ",end="")  
+for i in range(0,rC):  
+print("C ",end="")  
+print("\n")  
+k +=1 
+if(((lC==3)and (lM == 
+1))or((lC==3)and(lM==2))or((lC==2)and(lM==1))or((rC==3)and (rM == 
+1))or((rC==3)and(rM==2))or((rC==2)and(rM==1))):  
+print("Cannibals eat missionaries:\nYou lost the game")  
+break 
+if((rM+rC) == 6):  
+print("You won the game : \n\tCongrats")  
+print("Total attempt")  
+print(k)  
+break 
+while(True):  
+print("Right side -> Left side river travel")  
+userM = int(input("Enter number of Missionaries travel => "))  
+userC = int(input("Enter number of Cannibals travel => "))   
+if((userM==0)and(userC==0)):  
+print("Empty travel not possible")  
+print("Re-enter : ")  
+elif(((userM+userC) <= 2)and((rM-userM)>=0)and((rC-userC)>=0)):  
+break 
+else:  
+print("Wrong input re-enter : ")  
+lM += userM   
+lC += userC  
+rM -= userM  
+rC -= userC 
+k +=1 
+print("\n")  
+for i in range(0,lM):  
+print("M ",end="")  
+for i in range(0,lC):  
+print("C ",end="")  
+print("| <-- | ",end="")  
+for i in range(0,rM):  
+print("M ",end="")  
+for i in range(0,rC):  
+print("C ",end="")  
+print("\n")  
+if(((lC==3)and 
+(lM == 
+1))or((lC==3)and(lM==2))or((lC==2)and(lM==1))or((rC==3)and 
+(rM == 
+1))or((rC==3)and(rM==2))or((rC==2)and(rM==1))):  
+print("Cannibals eat missionaries:\nYou lost the game")  
+break 
+except EOFError as e:  
+print("\nInvalid input please retry !!")
+                    </code></pre>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Program 3 -->
+    <div class="row" id="program-3">
+        <div class="col-md-12">
+            <div class="card program-card">
+                <i class="fas fa-copy copy-icon" onclick="copyToClipboard('program3')"></i>
+                <div class="card-body">
+                    <h5 class="card-title">3:Program 3</h5>
+                    <pre><code class="python" id="program3">
+# Python program for A* Search Algorithm 
+import math 
+import heapq 
+# Define the Cell class 
+class Cell: 
+def __init__(self): 
+# Parent cell's row index 
+self.parent_i = 0 
+# Parent cell's column index 
+self.parent_j = 0 
+# Total cost of the cell (g + h) 
+self.f = float('inf') 
+# Cost from start to this cell 
+self.g = float('inf') 
+# Heuristic cost from this cell to destination 
+self.h = 0 
+# Define the size of the grid 
+ROW = 9 
+COL = 10 
+# Check if a cell is valid (within the grid) 
+def is_valid(row, col): 
+return (row >= 0) and (row < ROW) and (col >= 0) and (col < COL) 
+# Check if a cell is unblocked 
+def is_unblocked(grid, row, col): 
+return grid[row][col] == 1 
+# Check if a cell is the destination 
+def is_destination(row, col, dest): 
+return row == dest[0] and col == dest[1] 
+# Calculate the heuristic value of a cell (Euclidean distance to destination) 
+def calculate_h_value(row, col, dest): 
+return ((row - dest[0]) ** 2 + (col - dest[1]) ** 2) ** 0.5 
+# Trace the path from source to destination 
+def trace_path(cell_details, dest): 
+print("The Path is ") 
+path = [] 
+row = dest[0] 
+col = dest[1] 
+# Trace the path from destination to source using parent cells 
+while not (cell_details[row][col].parent_i == row and 
+cell_details[row][col].parent_j == col): 
+path.append((row, col)) 
+temp_row = cell_details[row][col].parent_i 
+temp_col = cell_details[row][col].parent_j 
+row = temp_row 
+col = temp_col 
+# Add the source cell to the path 
+path.append((row, col)) 
+# Reverse the path to get the path from source to destination 
+path.reverse() 
+# Print the path 
+for i in path: 
+print("->", i, end=" ") 
+print() 
+# Implement the A* search algorithm 
+def a_star_search(grid, src, dest): 
+    # Check if the source and destination are valid 
+    if not is_valid(src[0], src[1]) or not is_valid(dest[0], dest[1]): 
+        print("Source or destination is invalid") 
+        return 
+    # Check if the source and destination are unblocked 
+    if not is_unblocked(grid, src[0], src[1]) or not is_unblocked(grid, 
+dest[0], dest[1]): 
+        print("Source or the destination is blocked") 
+        return 
+    # Check if we are already at the destination 
+    if is_destination(src[0], src[1], dest): 
+        print("We are already at the destination") 
+        return 
+    # Initialize the closed list (visited cells) 
+    closed_list = [[False for _ in range(COL)] for _ in range(ROW)] 
+    # Initialize the details of each cell 
+    cell_details = [[Cell() for _ in range(COL)] for _ in range(ROW)] 
+    # Initialize the start cell details 
+    i = src[0] 
+    j = src[1] 
+    cell_details[i][j].f = 0 
+    cell_details[i][j].g = 0 
+    cell_details[i][j].h = 0 
+    cell_details[i][j].parent_i = i 
+    cell_details[i][j].parent_j = j 
+    # Initialize the open list (cells to be visited) with the start cell 
+    open_list = [] 
+    heapq.heappush(open_list, (0.0, i, j)) 
+    # Initialize the flag for whether destination is found 
+    found_dest = False 
+    # Main loop of A* search algorithm 
+    while len(open_list) > 0: 
+        # Pop the cell with the smallest f value from the open list 
+        p = heapq.heappop(open_list) 
+        # Mark the cell as visited 
+        i = p[1] 
+        j = p[2] 
+        closed_list[i][j] = True 
+        # For each direction, check the successors 
+        directions = [(0, 1), (0, -1), (1, 0), (-1, 0), 
+                      (1, 1), (1, -1), (-1, 1), (-1, -1)] 
+        for dir in directions: 
+            new_i = i + dir[0] 
+            new_j = j + dir[1] 
+            # If the successor is valid, unblocked, and not visited 
+            if is_valid(new_i, new_j) and is_unblocked(grid, new_i, 
+new_j) and not closed_list[new_i][new_j]: 
+                # If the successor is the destination 
+                if is_destination(new_i, new_j, dest): 
+                    # Set the parent of the destination cell 
+                    cell_details[new_i][new_j].parent_i = i 
+                    cell_details[new_i][new_j].parent_j = j 
+                    print("The destination cell is found") 
+            # Trace and print the path from source to destination 
+                    trace_path(cell_details, dest) 
+                    found_dest = True 
+                    return 
+                else: 
+                    # Calculate the new f, g, and h values 
+                    g_new = cell_details[i][j].g + 1.0 
+                    h_new = calculate_h_value(new_i, new_j, dest) 
+                    f_new = g_new + h_new 
+       # If the cell is not in the open list or the new f value is smaller 
+                    if cell_details[new_i][new_j].f == float('inf') or 
+cell_details[new_i][new_j].f > f_new: 
+                        # Add the cell to the open list 
+                        heapq.heappush(open_list, (f_new, new_i, 
+new_j)) 
+                        # Update the cell details 
+                        cell_details[new_i][new_j].f = f_new 
+                        cell_details[new_i][new_j].g = g_new 
+                        cell_details[new_i][new_j].h = h_new 
+                        cell_details[new_i][new_j].parent_i = i 
+                        cell_details[new_i][new_j].parent_j = j 
+    # If the destination is not found after visiting all cells 
+    if not found_dest: 
+        print("Failed to find the destination cell") 
+# Driver Code 
+def main(): 
+    # Define the grid (1 for unblocked, 0 for blocked) 
+    grid = [ 
+        [1, 0, 1, 1, 1, 1, 0, 1, 1, 1], 
+        [1, 1, 1, 0, 1, 1, 1, 0, 1, 1], 
+        [1, 1, 1, 0, 1, 1, 0, 1, 0, 1], 
+        [0, 0, 1, 0, 1, 0, 0, 0, 0, 1], 
+        [1, 1, 1, 0, 1, 1, 1, 0, 1, 0], 
+        [1, 0, 1, 1, 1, 1, 0, 1, 0, 0], 
+        [1, 0, 0, 0, 0, 1, 0, 0, 0, 1], 
+        [1, 0, 1, 1, 1, 1, 0, 1, 1, 1], 
+        [1, 1, 1, 0, 0, 0, 1, 0, 0, 1] 
+    ] 
+    # Define the source and destination 
+    src = [8, 0] 
+    dest = [0, 0] 
+    # Run the A* search algorithm 
+    a_star_search(grid, src, dest) 
+if __name__ == "__main__": 
+    main() 
+                    </code></pre>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+    <!-- Program 4 -->
+    <div class="row" id="program-3">
+        <div class="col-md-12">
+            <div class="card program-card">
+                <i class="fas fa-copy copy-icon" onclick="copyToClipboard('program4')"></i>
+                <div class="card-body">
+                    <h5 class="card-title">4. Implement AO* Search algorithm </h5>
+                    <pre><code class="python" id="program4">
+# Cost to find the AND and OR path 
+def Cost (H, condition, weight = 1): 
+    cost = {} 
+    if 'AND' in condition: 
+        AND_nodes = condition['AND'] 
+        Path_A = ' AND '.join(AND_nodes) 
+        PathA = sum(H[node]+weight for node in AND_nodes) 
+        cost[Path_A] = PathA 
+    if 'OR' in condition: 
+        OR_nodes = condition['OR'] 
+        Path_B =' OR '.join(OR_nodes) 
+        PathB = min(H[node]+weight for node in OR_nodes) 
+        cost[Path_B] = PathB 
+    return cost 
+# Update the cost 
+def update_cost(H, Conditions, weight=1): 
+    Main_nodes = list(Conditions.keys()) 
+    Main_nodes.reverse() 
+    least_cost= {} 
+    for key in Main_nodes: 
+        condition = Conditions[key] 
+        print(key,':', Conditions[key],'>>>', Cost(H, condition, weight)) 
+        c = Cost(H, condition, weight)  
+        H[key] = min(c.values()) 
+        least_cost[key] = Cost(H, condition, weight)             
+    return least_cost 
+# Print the shortest path 
+def shortest_path(Start,Updated_cost, H): 
+    Path = Start 
+    if Start in Updated_cost.keys(): 
+        Min_cost = min(Updated_cost[Start].values()) 
+        key = list(Updated_cost[Start].keys()) 
+        values = list(Updated_cost[Start].values()) 
+        Index = values.index(Min_cost)    
+# FIND MINIMIMUM PATH KEY 
+        Next = key[Index].split() 
+# ADD TO PATH FOR OR PATH 
+        if len(Next) == 1: 
+            Start =Next[0] 
+            Path += '<--' +shortest_path(Start, Updated_cost, H) 
+ # ADD TO PATH FOR AND PATH 
+        else: 
+            Path +='<--('+key[Index]+') ' 
+            Start = Next[0] 
+            Path += '[' +shortest_path(Start, Updated_cost, H) + ' + ' 
+            Start = Next[-1] 
+            Path +=  shortest_path(Start, Updated_cost, H) + ']' 
+    return Path 
+H = {'A': -1, 'B': 5, 'C': 2, 'D': 4, 'E': 7, 'F': 9, 'G': 3, 'H': 0, 'I':0, 'J':0} 
+Conditions = { 
+ 'A': {'OR': ['B'], 'AND': ['C', 'D']}, 
+ 'B': {'OR': ['E', 'F']}, 
+ 'C': {'OR': ['G'], 'AND': ['H', 'I']}, 
+ 'D': {'OR': ['J']} 
+} 
+# weight 
+weight = 1 
+# Updated cost 
+print('Updated Cost :') 
+Updated_cost = update_cost(H, Conditions, weight=1) 
+print('*'*75) 
+print('Shortest Path :\n',shortest_path('A', Updated_cost,H))
+                    </code></pre>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Program 5 -->
+    <div class="row" id="program-3">
+        <div class="col-md-12">
+            <div class="card program-card">
+                <i class="fas fa-copy copy-icon" onclick="copyToClipboard('program5')"></i>
+                <div class="card-body">
+                    <h5 class="card-title">5.Solve 8-Queens Problem with suitable assumptions</h5>
+                    <pre><code class="python" id="program5">
+N = 8 
+def solveNQueens(board, col): 
+if col == N: 
+print(board) 
+return True 
+for i in range(N): 
+if isSafe(board, i, col): 
+board[i][col] = 1 
+if solveNQueens(board, col + 1): 
+return True 
+board[i][col] = 0 
+return False 
+def isSafe(board, row, col): 
+for x in range(col): 
+if board[row][x] == 1: 
+return False 
+for x, y in zip(range(row, -1, -1), range(col, -1, -1)): 
+if board[x][y] == 1: 
+return False 
+for x, y in zip(range(row, N, 1), range(col, -1, -1)): 
+if board[x][y] == 1: 
+return False 
+return True 
+board = [[0 for x in range(N)] for y in range(N)] 
+if not solveNQueens(board, 0): 
+print("No solution found")
+                    </code></pre>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Program 6 -->
+    <div class="row" id="program-3">
+        <div class="col-md-12">
+            <div class="card program-card">
+                <i class="fas fa-copy copy-icon" onclick="copyToClipboard('program6')"></i>
+                <div class="card-body">
+                    <h5 class="card-title"> 6: Implementation of TSP using heuristic approach</h5>
+                    <pre><code class="python" id="program6">
+from sys import maxsize 
+v = 4 
+def travelling_salesman_function(graph, s): 
+    vertex = [] 
+    for i in range(v): 
+        if i != s: 
+            vertex.append(i) 
+    min_path = maxsize 
+    while True: 
+        current_cost = 0 
+        k = s 
+        for i in range(len(vertex)): 
+            current_cost += graph[k][vertex[i]] 
+            k = vertex[i] 
+        current_cost += graph[k][s] 
+        min_path = min(min_path, current_cost) 
+        if not next_perm(vertex): 
+            break 
+    return min_path 
+def next_perm(l): 
+    n = len(l) 
+    i = n-2 
+    while i >= 0 and l[i] > l[i+1]: 
+        i -= 1 
+    if i == -1: 
+        return False 
+    j = i+1 
+    while j < n and l[j] > l[i]: 
+        j += 1 
+    j -= 1 
+    l[i], l[j] = l[j], l[i] 
+    left = i+1 
+    right = n-1 
+    while left < right: 
+        l[left], l[right] = l[right], l[left] 
+        left += 1 
+        right -= 1 
+    return True 
+graph = [[0,10,15,20], [10,0,35,25], [15,35,0,30], [20,25,30,0]] 
+s = 0 
+res = travelling_salesman_function(graph,s) 
+print(res)
+                    </code></pre>
+                </div>
+            </div>
+        </div>
+    </div>
+  
+
+</div>
+
+<div class="footer">
+    <a href="#" target="_blank" rel="noopener noreferrer">
+        <span class="footer-icons"><i class="fab fa-github"></i></span>
+    </a>
+</div>
+
+<div id="dark-toast" class="dark-toast">
+    <div class="toast-body">Copied to clipboard!</div>
+</div>
+
+<!-- Bootstrap JS and Popper.js -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.0.7/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<!-- Highlight.js for syntax highlighting -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+<script>
+    function copyToClipboard(elementId) {
+        var copyText = document.getElementById(elementId);
+        var textArea = document.createElement("textarea");
+        textArea.value = copyText.innerText;
+        document.body.appendChild(textArea);
+        textArea.select();
+        document.execCommand('copy');
+        document.body.removeChild(textArea);
+
+        var toast = document.getElementById('dark-toast');
+        toast.style.display = 'block';
+        toast.innerText = 'Copied to clipboard!';
+
+        setTimeout(function () {
+            toast.style.display = 'none';
+        }, 2000);
+    }
+
+    function copyProgramFromUrl() {
+        var url = window.location.href;
+        var programNumber = url.match(/ml(\d+)$/);
+        if (programNumber) {
+            var programId = 'program' + programNumber[1];
+            copyToClipboard(programId);
+        }
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+        copyProgramFromUrl();
+    });
+</script>
+
+
+</body>
+</html>
