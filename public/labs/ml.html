@@ -229,6 +229,175 @@ print("Classification Accuracy:", metrics.accuracy_score(y_test, y_pred))
     </div>
 
 </div>
+ 
+    <!-- Program 8-->
+    <div class="row" id="program-8">
+        <div class="col-md-12">
+            <div class="card program-card">
+                <i class="fas fa-copy copy-icon" onclick="copyToClipboard('program-8')"></i>
+                <div class="card-body">
+                    <h5 class="card-title">8. program 8</h5>
+                    <pre><code class="python" id="program-8">
+import sys
+from urllib.request import urlopen
+import numpy as np
+import pandas as pd
+
+heartDisease_df = pd.read_csv('heart.csv')
+heartDisease_df
+heartDisease_df.drop(['ca', 'slope', 'thal', 'oldpeak'], axis=1, inplace=True)
+heartDisease_df.replace('?', np.nan, inplace=True)
+
+from pgmpy.estimators import MaximumLikelihoodEstimator
+from pgmpy.models import BayesianNetwork
+
+model = BayesianNetwork([
+    ('age', 'trestbps'),
+    ('age', 'fbs'), 
+    ('sex', 'trestbps'), 
+    ('exang', 'trestbps'), 
+    ('trestbps', 'target'), 
+    ('fbs', 'target'), 
+    ('target', 'restecg'),
+    ('target', 'thalach'), 
+    ('target', 'chol')
+])
+
+model.fit(heartDisease_df, estimator=MaximumLikelihoodEstimator)
+
+print(model.get_cpds('age'))
+print(model.get_cpds('chol'))
+print(model.get_cpds('sex'))
+print(model.get_independencies())
+
+from pgmpy.inference import VariableElimination
+
+HeartDisease_infer = VariableElimination(model)
+q = HeartDisease_infer.query(variables=['target'], evidence={'age': 42}, joint=False)
+print(q['target'])
+
+q = HeartDisease_infer.query(variables=['target'], evidence={'chol': 318}, joint=False)
+print(q['target'])
+
+
+                    </code></pre>
+                </div>
+            </div>
+        </div>
+    </div>
+  <!-- Program 9-->
+  <div class="row" id="program-9">
+    <div class="col-md-12">
+        <div class="card program-card">
+            <i class="fas fa-copy copy-icon" onclick="copyToClipboard('program-9')"></i>
+            <div class="card-body">
+                <h5 class="card-title">9. program 9</h5>
+                <pre><code class="python" id="program-9">
+import pandas as pd
+from sklearn import datasets
+from sklearn.model_selection import train_test_split
+from sklearn.svm import SVC
+from sklearn.metrics import accuracy_score, classification_report, confusion_matrix
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+iris = datasets.load_iris()
+X = iris.data
+y = iris.target
+
+df = pd.DataFrame(data=iris.data, columns=iris.feature_names)
+df['target'] = iris.target
+print(df.head())
+
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=42)
+
+svm_model = SVC(kernel='linear')
+svm_model.fit(X_train, y_train)
+
+y_pred = svm_model.predict(X_test)
+
+accuracy = accuracy_score(y_test, y_pred)
+print(f'Accuracy: {accuracy * 100:.2f}%')
+print('\nClassification Report:')
+print(classification_report(y_test, y_pred, target_names=iris.target_names))
+print('\nConfusion Matrix:')
+conf_matrix = confusion_matrix(y_test, y_pred)
+sns.heatmap(conf_matrix, annot=True, cmap='Blues', xticklabels=iris.target_names, yticklabels=iris.target_names)
+plt.xlabel('Predicted')
+plt.ylabel('True')
+plt.show()
+
+
+                </code></pre>
+            </div>
+        </div>
+    </div>
+</div>
+
+    <!-- Program 10-->
+    <div class="row" id="program-10">
+        <div class="col-md-12">
+            <div class="card program-card">
+                <i class="fas fa-copy copy-icon" onclick="copyToClipboard('program-10')"></i>
+                <div class="card-body">
+                    <h5 class="card-title">10. program 10</h5>
+                    <pre><code class="python" id="program-10">
+import pandas as pd
+from math import log
+from collections import Counter
+from pprint import pprint
+
+df_tennis = pd.read_csv('tennis.csv')
+
+def entropy(probs):
+    return sum([-prob * log(prob, 2) for prob in probs])
+
+def entropy_of_list(a_list):
+    cnt = Counter(x for x in a_list)
+    num_instances = len(a_list) * 1.0
+    probs = [x / num_instances for x in cnt.values()]
+    return entropy(probs)
+
+def information_gain(df, split_attribute_name, target_attribute_name):
+    df_split = df.groupby(split_attribute_name)
+    nobs = len(df.index) * 1.0
+    df_agg_ent = df_split.agg({target_attribute_name: [entropy_of_list, lambda x: len(x) / nobs]})[target_attribute_name]
+    df_agg_ent.columns = ['Entropy', 'PropObservations']
+    new_entropy = sum(df_agg_ent['Entropy'] * df_agg_ent['PropObservations'])
+    old_entropy = entropy_of_list(df[target_attribute_name])
+    return old_entropy - new_entropy
+
+def id3(df, target_attribute_name, attribute_names, default_class=None):
+    cnt = Counter(x for x in df[target_attribute_name])
+    if len(cnt) == 1:
+        return next(iter(cnt))
+    elif df.empty or (not attribute_names):
+        return default_class
+    else:
+        default_class = max(cnt.keys())
+        gainz = [information_gain(df, attr, target_attribute_name) for attr in attribute_names]
+        index_of_max = gainz.index(max(gainz))
+        best_attr = attribute_names[index_of_max]
+        tree = {best_attr: {}}
+        remaining_attribute_names = [i for i in attribute_names if i != best_attr]
+        for attr_val, data_subset in df.groupby(best_attr):
+            subtree = id3(data_subset, target_attribute_name, remaining_attribute_names, default_class)
+            tree[best_attr][attr_val] = subtree
+        return tree
+
+attribute_names = list(df_tennis.columns)
+attribute_names.remove('PlayTennis')
+
+tree = id3(df_tennis, 'PlayTennis', attribute_names)
+print("\n\nThe Resultant Decision Tree is: \n")
+pprint(tree)
+
+                    </code></pre>
+                </div>
+            </div>
+        </div>
+    </div>
+
 
 <div class="footer">
     <a href="#" target="_blank" rel="noopener noreferrer">
