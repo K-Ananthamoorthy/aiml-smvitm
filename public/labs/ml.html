@@ -84,6 +84,111 @@
 <div class="container-fluid">
     <h2 class="text-center mt-4">ML Lab Programs</h2>
 
+   <!-- Program 5-->
+   <div class="row" id="program-5">
+    <div class="col-md-12">
+        <div class="card program-card">
+            <i class="fas fa-copy copy-icon" onclick="copyToClipboard('program-5')"></i>
+            <div class="card-body">
+                <h5 class="card-title">program 5-K MEANS</h5>
+                <pre><code class="python" id="program-5">
+import numpy as np
+
+# Input and output data
+X = np.array(([2, 9], [1, 5], [3, 6]), dtype=float)
+y = np.array(([92], [86], [89]), dtype=float)
+
+# Normalize data
+X = X / np.amax(X, axis=0) # Maximum of X array longitudinally
+y = y / 100
+
+# Training settings
+epoch = 5000 # Setting training iterations
+lr = 0.1 # Setting learning rate
+inputlayer_neurons = 2 # Number of features in dataset
+hiddenlayer_neurons = 3 # Number of hidden layer neurons
+output_neurons = 1 # Number of output neurons
+
+import matplotlib.pyplot as plt
+from sklearn.cluster import KMeans
+from sklearn import preprocessing as p
+from sklearn.mixture import GaussianMixture as GMM
+import sklearn.metrics as sm
+import pandas as pd
+import numpy as np
+from sklearn.datasets import load_iris
+
+# Load the Iris dataset
+iris = load_iris()
+iris_df = pd.DataFrame(data=iris.data, columns=iris.feature_names)
+iris_df['Targets'] = iris.target
+
+# Features and target
+x = iris_df[['sepal length (cm)', 'sepal width (cm)', 'petal length (cm)', 'petal width (cm)']]
+y = iris_df[['Targets']]
+
+# KMeans clustering
+model = KMeans(n_clusters=3)
+model.fit(x)
+
+# Standardize the features
+scaler = p.StandardScaler()
+scaler.fit(x)
+xs = scaler.transform(x)
+
+# GMM clustering
+gmm = GMM(n_components=3)
+gmm.fit(xs)
+y_gmm = gmm.predict(xs)
+
+# Plotting
+plt.figure(figsize=(10,10))
+colormap = np.array(['red', 'lime', 'blue'])
+
+# Real classification
+plt.subplot(2, 2, 1)
+plt.scatter(x['petal length (cm)'], x['petal width (cm)'], c=colormap[y['Targets']], s=40)
+plt.title('Real Classification')
+plt.xlabel('petal length (cm)')
+plt.ylabel('petal width (cm)')
+
+# KMeans clustering
+plt.subplot(2, 2, 2)
+plt.scatter(x['petal length (cm)'], x['petal width (cm)'], c=colormap[model.labels_], s=40)
+plt.title('K Means Clustering')
+plt.xlabel('petal length (cm)')
+plt.ylabel('petal width (cm)')
+
+# GMM classification
+plt.subplot(2, 2, 3)
+plt.scatter(x['petal length (cm)'], x['petal width (cm)'], c=colormap[y_gmm], s=40)
+plt.title('GMM Classification')
+plt.xlabel('petal length (cm)')
+plt.ylabel('petal width (cm)')
+
+plt.show()
+
+# Evaluation of KMeans clustering
+print('Evaluation of KMeans Clustering')
+print('RandIndex: %f' % sm.adjusted_rand_score(y['Targets'], model.labels_))
+print('Homogeneity: %f' % sm.homogeneity_score(y['Targets'], model.labels_))
+print('Completeness: %f' % sm.completeness_score(y['Targets'], model.labels_))
+print('V-Measure: %f' % sm.v_measure_score(y['Targets'], model.labels_))
+
+# Evaluation of GMM clustering
+print('Evaluation of GMM with ground truth classification of iris dataset')
+print('RandIndex: %f' % sm.adjusted_rand_score(y['Targets'], y_gmm))
+print('Homogeneity: %f' % sm.homogeneity_score(y['Targets'], y_gmm))
+print('Completeness: %f' % sm.completeness_score(y['Targets'], y_gmm))
+print('V-Measure: %f' % sm.v_measure_score(y['Targets'], y_gmm))
+
+
+                </code></pre>
+            </div>
+        </div>
+    </div>
+</div>
+
 
  
     <!-- Program 6-->
