@@ -84,200 +84,75 @@
 <div class="container-fluid">
     <h2 class="text-center mt-4">ML Lab Programs</h2>
 
-    <!-- Program 1 -->
-    <div class="row" id="program-1">
-        <div class="col-md-12">
-            <div class="card program-card">
-                <i class="fas fa-copy copy-icon" onclick="copyToClipboard('program1')"></i>
-                <div class="card-body">
-                    <h5 class="card-title"> 
-                        1. Find-S algorithm
-                    </h5>
-                    <pre><code class="python" id="program1">
-import pandas as pd
-import numpy as np
 
-data = pd.read_csv("data.csv")
-instance = np.array(data)
-num_attributes = 6
-print("The initial value of hypothesis:", hypothesis := ['0'] * num_attributes)
-print(hypothesis)
-
-for j in range(0, num_attributes):
-    hypothesis[j] = instance[0][j]
-
-print("Find S: Finding a Maximally Specific Hypothesis\n")
-
-for i in range(len(instance)):
-    if instance[i][num_attributes - 1] == "yes":
-        for j in range(num_attributes):
-            if instance[i][j] != hypothesis[j]:
-                hypothesis[j] = "?"
-            else:
-                hypothesis[j] = instance[i][j]
-    print(f"For Training instance No. {i+1}, the hypothesis is:", hypothesis)
-
-print("\nThe Maximally Specific Hypothesis for a given Training Examples :\n")
-print(hypothesis)
-                    </code></pre>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Program 2 -->
-    <div class="row" id="program-2">
-        <div class="col-md-12">
-            <div class="card program-card">
-                <i class="fas fa-copy copy-icon" onclick="copyToClipboard('program2')"></i>
-                <div class="card-body">
-                    <h5 class="card-title">2. Candidate-Elimination algorithm</h5>
-                    <pre><code class="python" id="program2">
-import numpy as np
-import pandas as pd
-
-data = pd.read_csv('data.csv')
-concepts = np.array(data)[:, 0:-1]
-print("Instances are:\n", concepts)
-
-target = np.array(data)[:, -1]
-print("Target Values are:", target)
-
-def learn(concepts, target):
-    specific_h = concepts[0].copy()
-    print("Initialization of specific_h and general_h:")
-    print(specific_h)
-    
-    general_h = [['?' for _ in range(len(specific_h))] for _ in range(len(specific_h))]
-    print(general_h)
-    
-    for i, h in enumerate(concepts):
-        if target[i] == 'yes':
-            for x in range(len(specific_h)):
-                if h[x] != specific_h[x]:
-                    specific_h[x] = '?'
-                    general_h[x][x] = '?'
-        
-        if target[i] == 'no':
-            for x in range(len(specific_h)):
-                if h[x] != specific_h[x]:
-                    general_h[x][x] = specific_h[x]
-                else:
-                    general_h[x][x] = '?'
-        
-        print(f"Step {i+1} of Candidate Elimination Algorithm:")
-        print(specific_h)
-        print(general_h)
-        
-        indices = [i for i, val in enumerate(general_h) if val == ['?', '?', '?', '?', '?', '?']]
-        for i in indices:
-            general_h.remove(['?', '?', '?', '?', '?', '?'])
-    
-    return specific_h, general_h
-
-s_final, g_final = learn(concepts, target)
-print("\nFinal Specific_h:", s_final)
-print("Final General_h:", g_final)
-                    </code></pre>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Program 3 -->
-    <div class="row" id="program-3">
-        <div class="col-md-12">
-            <div class="card program-card">
-                <i class="fas fa-copy copy-icon" onclick="copyToClipboard('program3')"></i>
-                <div class="card-body">
-                    <h5 class="card-title">3. k-Nearest Neighbor algorithm</h5>
-                    <pre><code class="python" id="program3">
-from sklearn.neighbors import KNeighborsClassifier
-from sklearn import datasets
-from sklearn.model_selection import train_test_split
-from sklearn import metrics
-            
-iris = datasets.load_iris()
-print("Iris Data set loaded...")
-                        
-x_train, x_test, y_train, y_test = train_test_split(iris.data, iris.target, random_state=60, test_size=0.1)
-print("Dataset is split into training and testing samples...")
-print("Size of training data and its label:", x_train.shape, y_train.shape)
-print("Size of testing data and its label:", x_test.shape, y_test.shape)
-                        
-for i in range(len(iris.target_names)):
-    print("Label", i, "-", str(iris.target_names[i]))
-                        
-classifier = KNeighborsClassifier(n_neighbors=1)
-classifier.fit(x_train, y_train)
-                        
-y_pred = classifier.predict(x_test)
-                        
-print("Results of Classification using K-nn with K=1")
-print("\n----------------------------------------------")
-print('{:<15} {:<15} {:<15}'.format('Original Label', 'Predicted Label', 'Correct/Wrong'))
-print("----------------------------------------------")
-for r in range(len(x_test)):
-    print('{:<15} {:<15} {:<15}'.format(y_test[r], y_pred[r], 'Correct' if y_test[r] == y_pred[r] else 'Wrong'))
-                        
-print("\nConfusion Matrix:\n", metrics.confusion_matrix(y_test, y_pred))
-print("Classification Accuracy:", metrics.accuracy_score(y_test, y_pred))
-                    </code></pre>
-                </div>
-            </div>
-        </div>
-    </div>
-
-</div>
  
-    <!-- Program 8-->
-    <div class="row" id="program-8">
+    <!-- Program 6-->
+    <div class="row" id="program-6">
         <div class="col-md-12">
             <div class="card program-card">
-                <i class="fas fa-copy copy-icon" onclick="copyToClipboard('program-8')"></i>
+                <i class="fas fa-copy copy-icon" onclick="copyToClipboard('program-6')"></i>
                 <div class="card-body">
-                    <h5 class="card-title">8. program 8</h5>
-                    <pre><code class="python" id="program-8">
-import sys
-from urllib.request import urlopen
+                    <h5 class="card-title">program 6-ANN</h5>
+                    <pre><code class="python" id="program-6">
 import numpy as np
-import pandas as pd
 
-heartDisease_df = pd.read_csv('heart.csv')
-heartDisease_df
-heartDisease_df.drop(['ca', 'slope', 'thal', 'oldpeak'], axis=1, inplace=True)
-heartDisease_df.replace('?', np.nan, inplace=True)
+# Input and output data
+X = np.array(([2, 9], [1, 5], [3, 6]), dtype=float)
+y = np.array(([92], [86], [89]), dtype=float)
 
-from pgmpy.estimators import MaximumLikelihoodEstimator
-from pgmpy.models import BayesianNetwork
+# Normalize data
+X = X / np.amax(X, axis=0) # Maximum of X array longitudinally
+y = y / 100
 
-model = BayesianNetwork([
-    ('age', 'trestbps'),
-    ('age', 'fbs'), 
-    ('sex', 'trestbps'), 
-    ('exang', 'trestbps'), 
-    ('trestbps', 'target'), 
-    ('fbs', 'target'), 
-    ('target', 'restecg'),
-    ('target', 'thalach'), 
-    ('target', 'chol')
-])
+# Training settings
+epoch = 5000 # Setting training iterations
+lr = 0.1 # Setting learning rate
+inputlayer_neurons = 2 # Number of features in dataset
+hiddenlayer_neurons = 3 # Number of hidden layer neurons
+output_neurons = 1 # Number of output neurons
 
-model.fit(heartDisease_df, estimator=MaximumLikelihoodEstimator)
+# Weight and bias initialization
+wh = np.random.uniform(size=(inputlayer_neurons, hiddenlayer_neurons))
+bh = np.random.uniform(size=(1, hiddenlayer_neurons))
+wout = np.random.uniform(size=(hiddenlayer_neurons, output_neurons))
+bout = np.random.uniform(size=(1, output_neurons))
 
-print(model.get_cpds('age'))
-print(model.get_cpds('chol'))
-print(model.get_cpds('sex'))
-print(model.get_independencies())
+# Activation function
+def sigmoid(x):
+    return 1 / (1 + np.exp(-x))
 
-from pgmpy.inference import VariableElimination
+# Derivative of sigmoid function
+def derivatives_sigmoid(x):
+    return x * (1 - x)
 
-HeartDisease_infer = VariableElimination(model)
-q = HeartDisease_infer.query(variables=['target'], evidence={'age': 42}, joint=False)
-print(q['target'])
+# Training algorithm
+for i in range(epoch):
+    # Forward propagation
+    hinp1 = np.dot(X, wh)
+    hinp = hinp1 + bh
+    hlayer_act = sigmoid(hinp)
 
-q = HeartDisease_infer.query(variables=['target'], evidence={'chol': 318}, joint=False)
-print(q['target'])
+    outinp1 = np.dot(hlayer_act, wout)
+    outinp = outinp1 + bout
+    output = sigmoid(outinp)
+
+    # Backpropagation
+    EO = y - output
+    outgrad = derivatives_sigmoid(output)
+    d_output = EO * outgrad
+
+    EH = d_output.dot(wout.T)
+    hiddengrad = derivatives_sigmoid(hlayer_act)
+    d_hiddenlayer = EH * hiddengrad
+
+    # Updating weights and biases
+    wout += hlayer_act.T.dot(d_output) * lr
+    wh += X.T.dot(d_hiddenlayer) * lr
+
+# Output results
+print("Input: \n" + str(X))
+print("Actual Output: \n" + str(y))
+print("Predicted Output: \n" + str(output))
 
 
                     </code></pre>
@@ -285,63 +160,81 @@ print(q['target'])
             </div>
         </div>
     </div>
+
+
+
+<!-- Program 7-->
+    <div class="row" id="program-7">
+        <div class="col-md-12">
+            <div class="card program-card">
+                <i class="fas fa-copy copy-icon" onclick="copyToClipboard('program-7')"></i>
+                <div class="card-body">
+                    <h5 class="card-title">program 7 - Naive baysed classification</h5>
+                    <pre><code class="python" id="program-7">
+import pandas as pd
+from sklearn.feature_extraction.text import CountVectorizer
+from sklearn.model_selection import train_test_split
+from sklearn.naive_bayes import MultinomialNB
+from sklearn.metrics import accuracy_score, confusion_matrix, precision_score, recall_score
+
+# Load dataset
+msg = pd.read_csv('document.csv', names=['message', 'label'])
+print("Total Instances of Dataset: ", msg.shape[0])
+
+# Map labels to numerical values
+msg['labelnum'] = msg.label.map({'pos': 1, 'neg': 0})
+
+# Features and labels
+X = msg.message
+y = msg.labelnum
+
+# Split dataset into training and test sets
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+# Vectorize text data
+count_v = CountVectorizer()
+X_train_dm = count_v.fit_transform(X_train)
+X_test_dm = count_v.transform(X_test)
+
+# Train a classifier
+clf = MultinomialNB()
+clf.fit(X_train_dm, y_train)
+
+# Predict on test data
+pred = clf.predict(X_test_dm)
+
+# Print predictions
+for doc, p in zip(X_test, pred):
+    sentiment = 'pos' if p == 1 else 'neg'
+    print(f"{doc} -> {sentiment}")
+
+# Calculate and print accuracy metrics
+print('Accuracy Metrics: \n')
+print('Accuracy:', accuracy_score(y_test, pred))
+print('Recall:', recall_score(y_test, pred))
+print('Precision:', precision_score(y_test, pred))
+print('Confusion Matrix: \n', confusion_matrix(y_test, pred))
+
+
+
+                    </code></pre>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    
   <!-- Program 9-->
   <div class="row" id="program-9">
     <div class="col-md-12">
         <div class="card program-card">
             <i class="fas fa-copy copy-icon" onclick="copyToClipboard('program-9')"></i>
             <div class="card-body">
-                <h5 class="card-title">9. program 9</h5>
+                <h5 class="card-title">program 9-Decision Tree</h5>
                 <pre><code class="python" id="program-9">
-import pandas as pd
-from sklearn import datasets
-from sklearn.model_selection import train_test_split
-from sklearn.svm import SVC
-from sklearn.metrics import accuracy_score, classification_report, confusion_matrix
-import matplotlib.pyplot as plt
-import seaborn as sns
 
-iris = datasets.load_iris()
-X = iris.data
-y = iris.target
-
-df = pd.DataFrame(data=iris.data, columns=iris.feature_names)
-df['target'] = iris.target
-print(df.head())
-
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=42)
-
-svm_model = SVC(kernel='linear')
-svm_model.fit(X_train, y_train)
-
-y_pred = svm_model.predict(X_test)
-
-accuracy = accuracy_score(y_test, y_pred)
-print(f'Accuracy: {accuracy * 100:.2f}%')
-print('\nClassification Report:')
-print(classification_report(y_test, y_pred, target_names=iris.target_names))
-print('\nConfusion Matrix:')
-conf_matrix = confusion_matrix(y_test, y_pred)
-sns.heatmap(conf_matrix, annot=True, cmap='Blues', xticklabels=iris.target_names, yticklabels=iris.target_names)
-plt.xlabel('Predicted')
-plt.ylabel('True')
-plt.show()
-
-
-                </code></pre>
-            </div>
-        </div>
-    </div>
-</div>
-
-    <!-- Program 10-->
-    <div class="row" id="program-10">
-        <div class="col-md-12">
-            <div class="card program-card">
-                <i class="fas fa-copy copy-icon" onclick="copyToClipboard('program-10')"></i>
-                <div class="card-body">
-                    <h5 class="card-title">10. program 10</h5>
-                    <pre><code class="python" id="program-10">
 import pandas as pd
 from math import log
 from collections import Counter
@@ -391,6 +284,54 @@ attribute_names.remove('PlayTennis')
 tree = id3(df_tennis, 'PlayTennis', attribute_names)
 print("\n\nThe Resultant Decision Tree is: \n")
 pprint(tree)
+
+                </code></pre>
+            </div>
+        </div>
+    </div>
+</div>
+
+    <!-- Program 10-->
+    <div class="row" id="program-10">
+        <div class="col-md-12">
+            <div class="card program-card">
+                <i class="fas fa-copy copy-icon" onclick="copyToClipboard('program-10')"></i>
+                <div class="card-body">
+                    <h5 class="card-title">program 10- SVM</h5>
+                    <pre><code class="python" id="program-10">
+import pandas as pd
+from sklearn import datasets
+from sklearn.model_selection import train_test_split
+from sklearn.svm import SVC
+from sklearn.metrics import accuracy_score, classification_report, confusion_matrix
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+iris = datasets.load_iris()
+X = iris.data
+y = iris.target
+
+df = pd.DataFrame(data=iris.data, columns=iris.feature_names)
+df['target'] = iris.target
+print(df.head())
+
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=42)
+
+svm_model = SVC(kernel='linear')
+svm_model.fit(X_train, y_train)
+
+y_pred = svm_model.predict(X_test)
+
+accuracy = accuracy_score(y_test, y_pred)
+print(f'Accuracy: {accuracy * 100:.2f}%')
+print('\nClassification Report:')
+print(classification_report(y_test, y_pred, target_names=iris.target_names))
+print('\nConfusion Matrix:')
+conf_matrix = confusion_matrix(y_test, y_pred)
+sns.heatmap(conf_matrix, annot=True, cmap='Blues', xticklabels=iris.target_names, yticklabels=iris.target_names)
+plt.xlabel('Predicted')
+plt.ylabel('True')
+plt.show()
 
                     </code></pre>
                 </div>
